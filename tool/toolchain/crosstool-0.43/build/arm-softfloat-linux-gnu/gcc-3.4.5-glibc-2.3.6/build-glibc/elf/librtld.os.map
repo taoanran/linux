@@ -1,0 +1,652 @@
+Archive member included because of file (symbol)
+
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-check_fds.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__libc_check_standard_fds)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-divdi3.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__udivdi3)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-errno.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (rtld_errno)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__profil)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-prof-freq.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__profile_frequency)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-xstat64.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__GI___xstat64)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fxstat64.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__GI___fxstat64)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-open.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__open)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-close.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__close)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-read.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__libc_read)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-write.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__libc_write)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-lseek.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__lseek)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-access.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__access)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fcntl.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-check_fds.os) (__libc_fcntl)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getcwd.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__getcwd)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getpagesize.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (getpagesize)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mmap.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__mmap)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-munmap.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__munmap)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mprotect.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__mprotect)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-uname.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__uname)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-_exit.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (_exit)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getpid.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__getpid)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-environ.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__environ)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-bsd-_setjmp.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (_setjmp)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-__longjmp.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__longjmp)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-setjmp.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-bsd-_setjmp.os) (__sigsetjmp)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigaction.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os) (__sigaction)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigrestorer.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigaction.os) (__default_sa_restorer)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mp_clz_tab.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-divdi3.os) (__clz_tab)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strchr.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (strchr)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strcmp.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (strcmp)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strlen.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (strlen)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strnlen.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__strnlen)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memchr.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (memchr)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcmp.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (memcmp)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memmove.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (memmove)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memset.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (memset)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mempcpy.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__mempcpy)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-stpcpy.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__stpcpy)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcpy.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (memcpy)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-wordcopy.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memmove.os) (_wordcopy_fwd_aligned)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-setitimer.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os) (__setitimer)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-errno-loc.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-open.os) (__errno_location)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sysdep.os)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mmap.os) (__syscall_error)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__udivsi3)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__umodsi3)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o) (__div0)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_muldi3.o)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os) (__muldi3)
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_ashldi3.o)
+                              /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os (__ashldi3)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+START GROUP
+LOAD /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+LOAD /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a
+LOAD /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a
+END GROUP
+
+.interp
+ *(.interp)
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+
+.rela.text
+ *(.rela.text)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+
+.rela.rodata
+ *(.rela.rodata)
+
+.rel.data
+ *(.rel.data)
+
+.rela.data
+ *(.rela.data)
+
+.rel.tdata
+ *(.rel.tdata)
+
+.rela.tdata
+ *(.rela.tdata)
+
+.rel.tbss
+ *(.rel.tbss)
+
+.rela.tbss
+ *(.rela.tbss)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.init
+ *(.init)
+
+.plt
+ *(.plt)
+
+.text           0x00000000    0x11480
+ *(.text .stub)
+ .text          0x00000000     0xf0d4 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+                0x00008010                _dl_relocate_object
+                0x0000f040                sbrk
+                0x00003480                _dl_dst_count
+                0x00006d30                _dl_unload_cache
+                0x0000ecf4                __strtoul_internal
+                0x0000e9a8                calloc
+                0x0000b138                _dl_init_internal
+                0x0000d708                _dl_get_origin
+                0x0000b138                _dl_init
+                0x0000ef1c                __strsep
+                0x00000000                _start
+                0x0000ead4                __strerror_r
+                0x0000eac0                __sigjmp_save
+                0x0000f040                __sbrk
+                0x0000ea08                realloc
+                0x0000bd1c                _dl_dprintf
+                0x0000e070                _dl_show_auxv
+                0x00005ce4                _dl_map_object
+                0x000073ec                _dl_lookup_symbol_x
+                0x0000da64                _dl_check_caller
+                0x000064d4                _dl_rtld_di_serinfo
+                0x0000996c                _dl_reloc_bad_type
+                0x0000e97c                malloc
+                0x0000b45c                _dl_fini
+                0x0000ac14                _dl_runtime_resolve
+                0x00000be8                _dl_initial_error_catch_tsd
+                0x00003554                _dl_dst_substitute
+                0x0000e260                _dl_important_hwcaps
+                0x0000b84c                _dl_sysdep_read_whole_file
+                0x0000cec4                _dl_mcount_internal
+                0x0000d3d0                _dl_resolve_conflicts
+                0x0000e80c                __libc_memalign
+                0x0000ee68                _itoa
+                0x00006674                _dl_cache_libcmp
+                0x0000ec64                __GI___assert_perror_fail
+                0x0000ef1c                strsep
+                0x000098dc                _dl_protect_relro
+                0x0000cec4                _dl_mcount
+                0x0000bc9c                _dl_debug_printf
+                0x0000adf8                _dl_signal_cerror
+                0x0000ead0                longjmp
+                0x0000ec64                __assert_perror_fail
+                0x00003ea8                _dl_init_paths
+                0x0000b27c                _dl_sort_fini
+                0x0000e754                unsetenv
+                0x0000b7e0                _dl_debug_initialize
+                0x0000ac5c                _dl_signal_error
+                0x0000ac38                _dl_runtime_profile
+                0x00000010                _dl_start_user
+                0x0000ebf0                __assert_fail
+                0x00007d40                _dl_new_object
+                0x0000bcdc                _dl_debug_printf_c
+                0x0000aecc                _dl_catch_error
+                0x0000dc2c                _dl_sysdep_start
+                0x00006780                _dl_load_cache_lookup
+                0x0000af9c                _dl_receive_error
+                0x0000b848                __GI__dl_debug_state
+                0x0000efdc                __GI___chk_fail
+                0x0000ef1c                __strsep_g
+                0x0000c69c                _dl_check_all_versions
+                0x0000c1b0                _dl_check_map_versions
+                0x00009a9c                _dl_map_object_deps
+                0x0000efdc                __chk_fail
+                0x0000e06c                _dl_sysdep_start_cleanup
+                0x0000e9b8                free
+                0x00007a28                _dl_setup_hash
+                0x0000bd40                _dl_name_match_p
+                0x0000b848                _dl_debug_state
+                0x0000efe4                brk
+                0x0000c6f4                _dl_start_profile
+                0x0000d8d0                _dl_make_stack_executable
+                0x0000ebf0                __GI___assert_fail
+                0x0000e6f8                _dl_next_ld_env_entry
+                0x0000d8d0                __GI__dl_make_stack_executable
+                0x0000efe4                __brk
+ .text          0x0000f0d4      0x130 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-check_fds.os)
+                0x0000f1d0                __libc_check_standard_fds
+ .text          0x0000f204      0x73c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-divdi3.os)
+                0x0000f82c                __divdi3@GLIBC_2.0
+                0x0000f920                __umoddi3_internal
+                0x0000f894                __moddi3@GLIBC_2.0
+                0x0000f82c                __divdi3_internal
+                0x0000f894                __moddi3_internal
+                0x0000f920                __umoddi3@GLIBC_2.0
+                0x0000f904                __udivdi3@GLIBC_2.0
+                0x0000f904                __udivdi3_internal
+ .text          0x0000f940      0x190 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os)
+                0x0000f9fc                profil
+                0x0000f940                profil_counter
+                0x0000f9fc                __profil
+ .text          0x0000fad0       0x28 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-prof-freq.os)
+                0x0000fad0                __profile_frequency
+ .text          0x0000faf8       0x44 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-xstat64.os)
+                0x0000faf8                __GI___xstat64
+                0x0000faf8                ___xstat64
+                0x0000faf8                __xstat64
+ .text          0x0000fb3c       0x44 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fxstat64.os)
+                0x0000fb3c                __GI___fxstat64
+                0x0000fb3c                __fxstat64
+                0x0000fb3c                ___fxstat64
+ .text          0x0000fb80       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-open.os)
+                0x0000fb80                open
+                0x0000fb80                __open
+                0x0000fb80                __libc_open
+ .text          0x0000fbb0       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-close.os)
+                0x0000fbb0                __close
+                0x0000fbb0                close
+                0x0000fbb0                __libc_close
+ .text          0x0000fbe0       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-read.os)
+                0x0000fbe0                __read
+                0x0000fbe0                read
+                0x0000fbe0                __libc_read
+ .text          0x0000fc10       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-write.os)
+                0x0000fc10                __write
+                0x0000fc10                write
+                0x0000fc10                __libc_write
+ .text          0x0000fc40       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-lseek.os)
+                0x0000fc40                __libc_lseek
+                0x0000fc40                lseek
+                0x0000fc40                __lseek
+ .text          0x0000fc70       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-access.os)
+                0x0000fc70                access
+                0x0000fc70                __access
+ .text          0x0000fca0      0x2ec /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fcntl.os)
+                0x0000ff70                fcntl
+                0x0000ff70                __fcntl
+                0x0000ff70                __libc_fcntl
+                0x0000fca0                __fcntl_nocancel
+ .text          0x0000ff8c       0x9c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getcwd.os)
+                0x0000ff8c                getcwd
+                0x0000ff8c                __getcwd
+ .text          0x00010028       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getpagesize.os)
+                0x00010028                getpagesize
+                0x00010028                __getpagesize
+ *fill*         0x00010058        0x8 00000000
+ .text          0x00010060       0x60 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mmap.os)
+                0x00010060                mmap
+                0x00010060                __mmap
+ .text          0x000100c0       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-munmap.os)
+                0x000100c0                __munmap
+                0x000100c0                munmap
+ .text          0x000100f0       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mprotect.os)
+                0x000100f0                __mprotect
+                0x000100f0                mprotect
+ .text          0x00010120       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-uname.os)
+                0x00010120                uname
+                0x00010120                __uname
+ .text          0x00010150       0x4c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-_exit.os)
+                0x00010150                _Exit
+                0x00010150                _exit
+ *fill*         0x0001019c        0x4 00000000
+ .text          0x000101a0       0x10 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getpid.os)
+                0x000101a0                getpid
+                0x000101a0                __getpid
+ .text          0x000101b0       0x10 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-bsd-_setjmp.os)
+                0x000101b0                _setjmp
+ .text          0x000101c0       0x10 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-__longjmp.os)
+                0x000101c0                __longjmp
+ .text          0x000101d0       0x10 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-setjmp.os)
+                0x000101d0                __sigsetjmp
+ .text          0x000101e0      0x118 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigaction.os)
+                0x000101e0                __libc_sigaction
+                0x000101e0                sigaction
+                0x000101e0                __sigaction
+ *fill*         0x000102f8        0x8 00000000
+ .text          0x00010300       0x20 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigrestorer.os)
+                0x00010310                __default_rt_sa_restorer
+                0x00010300                __default_sa_restorer
+ .text          0x00010320      0x100 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strchr.os)
+                0x00010320                index
+                0x00010320                strchr
+ .text          0x00010420       0x2c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strcmp.os)
+                0x00010420                strcmp
+ *fill*         0x0001044c        0x4 00000000
+ .text          0x00010450       0x60 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strlen.os)
+                0x00010450                strlen
+ .text          0x000104b0       0xe8 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strnlen.os)
+                0x000104b0                strnlen
+                0x000104b0                __strnlen
+ .text          0x00010598      0x100 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memchr.os)
+                0x00010598                __memchr
+                0x00010598                memchr
+ .text          0x00010698      0x3f0 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcmp.os)
+                0x000109e0                memcmp
+                0x000109e0                bcmp
+ .text          0x00010a88      0x134 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memmove.os)
+                0x00010a88                memmove
+ *fill*         0x00010bbc        0x4 00000000
+ .text          0x00010bc0       0x90 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memset.os)
+                0x00010bc0                memset
+ .text          0x00010c50       0x98 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mempcpy.os)
+                0x00010c50                mempcpy
+                0x00010c50                __mempcpy
+ .text          0x00010ce8       0x1c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-stpcpy.os)
+                0x00010ce8                stpcpy
+                0x00010ce8                __stpcpy
+ .text          0x00010d04       0x9c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcpy.os)
+                0x00010d04                memcpy
+ .text          0x00010da0      0x3d8 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-wordcopy.os)
+                0x00011094                _wordcopy_bwd_dest_aligned
+                0x00010e9c                _wordcopy_fwd_dest_aligned
+                0x00010da0                _wordcopy_fwd_aligned
+                0x00010f7c                _wordcopy_bwd_aligned
+ *fill*         0x00011178        0x8 00000000
+ .text          0x00011180       0x30 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-setitimer.os)
+                0x00011180                __setitimer
+                0x00011180                setitimer
+ .text          0x000111b0       0x24 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-errno-loc.os)
+                0x000111b0                __errno_location
+ *fill*         0x000111d4        0xc 00000000
+ .text          0x000111e0       0x20 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sysdep.os)
+                0x000111e0                __syscall_error
+                0x000111e4                __syscall_error_1
+ .text          0x00011200       0xf8 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+                0x00011200                __udivsi3
+ .text          0x000112f8       0xcc /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+                0x000112f8                __umodsi3
+ .text          0x000113c4       0x1c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+                0x000113c4                __div0
+ .text          0x000113e0       0x50 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_muldi3.o)
+                0x000113e0                __muldi3
+ .text          0x00011430       0x50 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_ashldi3.o)
+                0x00011430                __ashldi3
+ *(.gnu.warning)
+
+.fini
+ *(.fini)
+
+.rodata         0x00000000      0xb3c
+ *(.rodata)
+ .rodata        0x00000000      0xa1c /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+                0x00000a0c                _itoa_lower_digits_internal
+                0x000005a0                _dl_out_of_memory_internal
+                0x000005a0                _dl_out_of_memory
+ .rodata        0x00000a1c       0x14 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fcntl.os)
+ .rodata        0x00000a30        0xc /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getcwd.os)
+ .rodata        0x00000a3c      0x100 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mp_clz_tab.os)
+                0x00000a3c                __clz_tab
+
+.rodata.str1.4  0x00000000     0x250c
+ .rodata.str1.4
+                0x00000000     0x24a8 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+ .rodata.str1.4
+                0x000024a8        0xc /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-check_fds.os)
+ .rodata.str1.4
+                0x000024b4       0x58 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getcwd.os)
+
+.rodata1
+ *(.rodata1)
+
+.eh_frame_hdr
+ *(.eh_frame_hdr)
+
+.preinit_array
+ *(.preinit_array)
+
+.init_array
+ *(.init_array)
+
+.fini_array
+ *(.fini_array)
+
+.data           0x00000000      0x3ec
+ *(.data)
+ .data          0x00000000      0x3ec /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+                0x000003e8                __stack_prot
+                0x00000000                _rtld_local
+                0x00000000                _rtld_global
+
+.data.rel       0x00000000       0xf8
+ .data.rel      0x00000000       0xf8 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+                0x00000000                _rtld_global_ro
+                0x00000000                _rtld_local_ro
+
+.data1
+ *(.data1)
+
+.tdata
+ *(.tdata)
+
+.tbss
+ *(.tbss)
+
+.eh_frame
+ *(.eh_frame)
+
+.gcc_except_table
+ *(.gcc_except_table)
+
+.dynamic
+ *(.dynamic)
+
+.jcr
+ *(.jcr)
+
+.got
+ *(.got.plt)
+ *(.got)
+
+.bss            0x00000000       0xe8
+ *(.dynbss)
+ *(.bss)
+ .bss           0x00000000       0xd4 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+                0x000000bc                __libc_stack_end
+                0x00000000                _dl_argv_internal
+                0x000000b4                __libc_enable_secure
+                0x000000d0                __curbrk
+                0x000000b4                __libc_enable_secure_internal
+                0x000000bc                __GI___libc_stack_end
+                0x000000b8                __libc_multiple_libcs
+                0x00000000                _dl_argv
+ .bss           0x000000d4       0x10 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os)
+ .bss           0x000000e4        0x4 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-environ.os)
+                0x000000e4                _environ
+                0x000000e4                environ
+                0x000000e4                __environ
+ *(COMMON)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000      0x3a8
+ *(.comment)
+ .comment       0x00000000      0x1c2 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/dl-allobjs.os
+ .comment       0x000001c2       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-check_fds.os)
+ .comment       0x000001d4       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-divdi3.os)
+ .comment       0x000001e6       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-errno.os)
+ .comment       0x000001f8       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-profil.os)
+ .comment       0x0000020a       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-prof-freq.os)
+ .comment       0x0000021c       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-xstat64.os)
+ .comment       0x0000022e       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fxstat64.os)
+ .comment       0x00000240       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-fcntl.os)
+ .comment       0x00000252       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getcwd.os)
+ .comment       0x00000264       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-getpagesize.os)
+ .comment       0x00000276       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-_exit.os)
+ .comment       0x00000288       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-environ.os)
+ .comment       0x0000029a       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-sigaction.os)
+ .comment       0x000002ac       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mp_clz_tab.os)
+ .comment       0x000002be       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strchr.os)
+ .comment       0x000002d0       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strcmp.os)
+ .comment       0x000002e2       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-strnlen.os)
+ .comment       0x000002f4       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memchr.os)
+ .comment       0x00000306       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcmp.os)
+ .comment       0x00000318       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memmove.os)
+ .comment       0x0000032a       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-mempcpy.os)
+ .comment       0x0000033c       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-stpcpy.os)
+ .comment       0x0000034e       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-memcpy.os)
+ .comment       0x00000360       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-wordcopy.os)
+ .comment       0x00000372       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/rtld-libc.a(rtld-errno-loc.os)
+ .comment       0x00000384       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_muldi3.o)
+ .comment       0x00000396       0x12 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_ashldi3.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000       0x60
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x00000020       0x20 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+ .debug_aranges
+                0x00000040       0x20 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000      0x348
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000      0x118 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+ .debug_info    0x00000118      0x118 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+ .debug_info    0x00000230      0x118 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+
+.debug_abbrev   0x00000000       0x3c
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x14 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000014       0x14 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+ .debug_abbrev  0x00000028       0x14 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+
+.debug_line     0x00000000      0x257
+ *(.debug_line)
+ .debug_line    0x00000000       0xd3 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_udivsi3.o)
+ .debug_line    0x000000d3       0xc5 /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_umodsi3.o)
+ .debug_line    0x00000198       0xbf /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/gcc-core-prefix/lib/gcc/arm-softfloat-linux-gnu/3.4.5/libgcc.a(_dvmd_lnx.o)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.note.gnu.arm.ident
+ *(.note.gnu.arm.ident)
+OUTPUT(/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/elf/librtld.os elf32-littlearm)

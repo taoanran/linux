@@ -1,0 +1,13 @@
+ \
+ /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/dummy.o \
+  /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/dummy.o:  \
+ /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/dummy.c \
+  ./../include/libc-symbols.h \
+  /home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/config.h \
+  ../sysdeps/wordsize-32/symbol-hacks.h
+
+./../include/libc-symbols.h:
+
+/home/taoanran/git/linux/crosstool-0.43/build/arm-softfloat-linux-gnu/gcc-3.4.5-glibc-2.3.6/build-glibc/config.h:
+
+../sysdeps/wordsize-32/symbol-hacks.h:

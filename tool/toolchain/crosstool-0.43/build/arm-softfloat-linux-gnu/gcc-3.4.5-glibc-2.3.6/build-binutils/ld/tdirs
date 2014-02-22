@@ -1,0 +1,2 @@
+tdir_armelf_linux=arm-softfloat-linux-gnu
+tdir_armelf=arm-softfloat-linux-gnu

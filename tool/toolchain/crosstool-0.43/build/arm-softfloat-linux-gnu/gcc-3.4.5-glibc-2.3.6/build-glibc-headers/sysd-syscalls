@@ -1,0 +1,3926 @@
+
+#### DIRECTORY = sysdeps/unix/sysv/linux/arm
+#### SYSDIRS = sysdeps/arm/elf
+
+#### CALL=syscall NUMBER=((0x900000 +113)) ARGS=7 SOURCE=-
+ifeq (,$(filter syscall,$(unix-syscalls)))
+unix-syscalls += syscall
+$(foreach o,$(object-suffixes),$(objpfx)syscall$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-syscall$o) $(objpfx)rtld-syscall.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (syscall, syscall, 7)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(syscall)'; \
+	 echo 'libc_hidden_def (syscall)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=oldgetrlimit NUMBER=((0x900000 + 76)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter oldgetrlimit,$(unix-syscalls)))
+ifneq (,$(filter .os,$(object-suffixes)))
+unix-syscalls += oldgetrlimit
+unix-extra-syscalls += oldgetrlimit
+shared-only-routines += oldgetrlimit
+$(objpfx)oldgetrlimit.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__old_getrlimit, getrlimit, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__old_getrlimit)'; \
+	 echo 'libc_hidden_def (__old_getrlimit)'; \
+	 echo 'symbol_version(__old_getrlimit, getrlimit, GLIBC_2.0)'; \
+	) | $(compile-syscall)
+endif
+endif
+ifeq (,$(filter oldgetrlimit,$(bp-thunks)))
+bp-thunks += oldgetrlimit
+$(objpfx)$(bppfx)oldgetrlimit.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __old_getrlimit(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__old_getrlimit) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__old_getrlimit) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__old_getrlimit) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__old_getrlimit)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=oldsetrlimit NUMBER=((0x900000 + 75)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter oldsetrlimit,$(unix-syscalls)))
+ifneq (,$(filter .os,$(object-suffixes)))
+unix-syscalls += oldsetrlimit
+unix-extra-syscalls += oldsetrlimit
+shared-only-routines += oldsetrlimit
+$(objpfx)oldsetrlimit.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__old_setrlimit, setrlimit, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__old_setrlimit)'; \
+	 echo 'libc_hidden_def (__old_setrlimit)'; \
+	 echo 'symbol_version(__old_setrlimit, setrlimit, GLIBC_2.0)'; \
+	) | $(compile-syscall)
+endif
+endif
+ifeq (,$(filter oldsetrlimit,$(bp-thunks)))
+bp-thunks += oldsetrlimit
+$(objpfx)$(bppfx)oldsetrlimit.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __old_setrlimit(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__old_setrlimit) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__old_setrlimit) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__old_setrlimit) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__old_setrlimit)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### DIRECTORY = sysdeps/unix/sysv/linux
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm
+
+#### CALL=add_key NUMBER=((0x900000 +309)) ARGS=i:pppii SOURCE=-
+ifeq (,$(filter add_key,$(unix-syscalls)))
+unix-syscalls += add_key
+unix-extra-syscalls += add_key
+$(foreach o,$(object-suffixes),$(objpfx)add_key$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-add_key$o) $(objpfx)rtld-add_key.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (add_key, add_key, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(add_key)'; \
+	 echo 'libc_hidden_def (add_key)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter add_key,$(bp-thunks)))
+bp-thunks += add_key
+$(objpfx)$(bppfx)add_key.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define add_key(p1, p2, p3, i4, i5) i0v; \'; \
+	 echo 'extern p1, p1v; extern p2, p2v; extern p3, p3v; extern i4, i4v; extern i5, i5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (add_key) (__typeof (p1v) *__bounded p1a, __typeof (p2v) *__bounded p2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a, __typeof (i5v) i5a) { \'; \
+	 echo '  extern __typeof (i0v) (add_key) (__typeof (p1v) *__unbounded, __typeof (p2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v), __typeof (i5v)); \'; \
+	 echo '  return (add_key) (CHECK_1 (p1a), CHECK_1 (p2a), CHECK_1 (p3a), i4a, i5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (add_key)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=adjtimex NUMBER=((0x900000 +124)) ARGS=i:p SOURCE=-
+ifeq (,$(filter adjtimex,$(unix-syscalls)))
+unix-syscalls += adjtimex
+unix-extra-syscalls += adjtimex
+$(foreach o,$(object-suffixes),$(objpfx)adjtimex$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-adjtimex$o) $(objpfx)rtld-adjtimex.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__adjtimex, adjtimex, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__adjtimex)'; \
+	 echo 'libc_hidden_def (__adjtimex)'; \
+	 echo 'weak_alias (__adjtimex, adjtimex)'; \
+	 echo 'libc_hidden_weak (adjtimex)'; \
+	 echo 'weak_alias (__adjtimex, ntp_adjtime)'; \
+	 echo 'libc_hidden_weak (ntp_adjtime)'; \
+	 echo 'weak_alias (__adjtimex, __adjtimex_internal)'; \
+	 echo 'libc_hidden_weak (__adjtimex_internal)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter adjtimex,$(bp-thunks)))
+bp-thunks += adjtimex
+$(objpfx)$(bppfx)adjtimex.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define ntp_adjtime(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__adjtimex) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (ntp_adjtime) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (ntp_adjtime) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__adjtimex)) \'; \
+	 echo 'weak_alias (BP_SYM (__adjtimex), BP_SYM (adjtimex)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (adjtimex)) \'; \
+	 echo 'weak_alias (BP_SYM (__adjtimex), BP_SYM (ntp_adjtime)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (ntp_adjtime)) \'; \
+	 echo 'weak_alias (BP_SYM (__adjtimex), BP_SYM (__adjtimex_internal)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__adjtimex_internal)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=bdflush NUMBER=((0x900000 +134)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter bdflush,$(unix-syscalls)))
+unix-syscalls += bdflush
+unix-extra-syscalls += bdflush
+$(foreach o,$(object-suffixes),$(objpfx)bdflush$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-bdflush$o) $(objpfx)rtld-bdflush.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (bdflush, bdflush, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(bdflush)'; \
+	 echo 'libc_hidden_def (bdflush)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=capget NUMBER=((0x900000 +184)) ARGS=i:pp SOURCE=-
+ifeq (,$(filter capget,$(unix-syscalls)))
+unix-syscalls += capget
+unix-extra-syscalls += capget
+$(foreach o,$(object-suffixes),$(objpfx)capget$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-capget$o) $(objpfx)rtld-capget.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (capget, capget, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(capget)'; \
+	 echo 'libc_hidden_def (capget)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter capget,$(bp-thunks)))
+bp-thunks += capget
+$(objpfx)$(bppfx)capget.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define capget(p1, p2) i0v; \'; \
+	 echo 'extern p1, p1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (capget) (__typeof (p1v) *__bounded p1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (capget) (__typeof (p1v) *__unbounded, __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (capget) (CHECK_1 (p1a), CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (capget)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=capset NUMBER=((0x900000 +185)) ARGS=i:pp SOURCE=-
+ifeq (,$(filter capset,$(unix-syscalls)))
+unix-syscalls += capset
+unix-extra-syscalls += capset
+$(foreach o,$(object-suffixes),$(objpfx)capset$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-capset$o) $(objpfx)rtld-capset.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (capset, capset, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(capset)'; \
+	 echo 'libc_hidden_def (capset)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter capset,$(bp-thunks)))
+bp-thunks += capset
+$(objpfx)$(bppfx)capset.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define capset(p1, p2) i0v; \'; \
+	 echo 'extern p1, p1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (capset) (__typeof (p1v) *__bounded p1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (capset) (__typeof (p1v) *__unbounded, __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (capset) (CHECK_1 (p1a), CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (capset)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=creat NUMBER=((0x900000 + 8)) ARGS=i:si SOURCE=-
+ifeq (,$(filter creat,$(unix-syscalls)))
+unix-syscalls += creat
+$(foreach o,$(object-suffixes),$(objpfx)creat$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-creat$o) $(objpfx)rtld-creat.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_creat, creat, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_creat)'; \
+	 echo 'libc_hidden_def (__libc_creat)'; \
+	 echo 'weak_alias (__libc_creat, creat)'; \
+	 echo 'libc_hidden_weak (creat)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter creat,$(bp-thunks)))
+bp-thunks += creat
+$(objpfx)$(bppfx)creat.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __libc_creat(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_creat) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__libc_creat) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__libc_creat) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_creat)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_creat), BP_SYM (creat)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (creat)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=create_module NUMBER=((0x900000 +127)) ARGS=3 SOURCE=-
+ifeq (,$(filter create_module,$(unix-syscalls)))
+unix-syscalls += create_module
+unix-extra-syscalls += create_module
+$(foreach o,$(object-suffixes),$(objpfx)create_module$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-create_module$o) $(objpfx)rtld-create_module.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (create_module, create_module, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(create_module)'; \
+	 echo 'libc_hidden_def (create_module)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=delete_module NUMBER=((0x900000 +129)) ARGS=3 SOURCE=-
+ifeq (,$(filter delete_module,$(unix-syscalls)))
+unix-syscalls += delete_module
+unix-extra-syscalls += delete_module
+$(foreach o,$(object-suffixes),$(objpfx)delete_module$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-delete_module$o) $(objpfx)rtld-delete_module.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (delete_module, delete_module, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(delete_module)'; \
+	 echo 'libc_hidden_def (delete_module)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=epoll_create NUMBER=((0x900000 +250)) ARGS=i:i SOURCE=-
+ifeq (,$(filter epoll_create,$(unix-syscalls)))
+unix-syscalls += epoll_create
+unix-extra-syscalls += epoll_create
+$(foreach o,$(object-suffixes),$(objpfx)epoll_create$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-epoll_create$o) $(objpfx)rtld-epoll_create.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (epoll_create, epoll_create, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(epoll_create)'; \
+	 echo 'libc_hidden_def (epoll_create)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=epoll_ctl NUMBER=((0x900000 +251)) ARGS=i:iiip SOURCE=-
+ifeq (,$(filter epoll_ctl,$(unix-syscalls)))
+unix-syscalls += epoll_ctl
+unix-extra-syscalls += epoll_ctl
+$(foreach o,$(object-suffixes),$(objpfx)epoll_ctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-epoll_ctl$o) $(objpfx)rtld-epoll_ctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (epoll_ctl, epoll_ctl, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(epoll_ctl)'; \
+	 echo 'libc_hidden_def (epoll_ctl)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter epoll_ctl,$(bp-thunks)))
+bp-thunks += epoll_ctl
+$(objpfx)$(bppfx)epoll_ctl.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define epoll_ctl(i1, i2, i3, p4) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern i3, i3v; extern p4, p4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (epoll_ctl) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (i3v) i3a, __typeof (p4v) *__bounded p4a) { \'; \
+	 echo '  extern __typeof (i0v) (epoll_ctl) (__typeof (i1v), __typeof (i2v), __typeof (i3v), __typeof (p4v) *__unbounded); \'; \
+	 echo '  return (epoll_ctl) (i1a, i2a, i3a, CHECK_1 (p4a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (epoll_ctl)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=epoll_wait NUMBER=((0x900000 +252)) ARGS=i:ipii SOURCE=-
+ifeq (,$(filter epoll_wait,$(unix-syscalls)))
+unix-syscalls += epoll_wait
+unix-extra-syscalls += epoll_wait
+$(foreach o,$(object-suffixes),$(objpfx)epoll_wait$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-epoll_wait$o) $(objpfx)rtld-epoll_wait.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (epoll_wait, epoll_wait, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(epoll_wait)'; \
+	 echo 'libc_hidden_def (epoll_wait)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter epoll_wait,$(bp-thunks)))
+bp-thunks += epoll_wait
+$(objpfx)$(bppfx)epoll_wait.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define epoll_wait(i1, p2, i3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (epoll_wait) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (epoll_wait) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v), __typeof (i4v)); \'; \
+	 echo '  return (epoll_wait) (i1a, CHECK_1 (p2a), i3a, i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (epoll_wait)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=fdatasync NUMBER=((0x900000 +148)) ARGS=i:i SOURCE=-
+ifeq (,$(filter fdatasync,$(unix-syscalls)))
+unix-syscalls += fdatasync
+$(foreach o,$(object-suffixes),$(objpfx)fdatasync$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fdatasync$o) $(objpfx)rtld-fdatasync.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (fdatasync, fdatasync, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(fdatasync)'; \
+	 echo 'libc_hidden_def (fdatasync)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=flock NUMBER=((0x900000 +143)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter flock,$(unix-syscalls)))
+unix-syscalls += flock
+$(foreach o,$(object-suffixes),$(objpfx)flock$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-flock$o) $(objpfx)rtld-flock.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__flock, flock, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__flock)'; \
+	 echo 'libc_hidden_def (__flock)'; \
+	 echo 'weak_alias (__flock, flock)'; \
+	 echo 'libc_hidden_weak (flock)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=fork NUMBER=((0x900000 + 2)) ARGS=i: SOURCE=-
+ifeq (,$(filter fork,$(unix-syscalls)))
+unix-syscalls += fork
+$(foreach o,$(object-suffixes),$(objpfx)fork$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fork$o) $(objpfx)rtld-fork.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__libc_fork, fork, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_fork)'; \
+	 echo 'libc_hidden_def (__libc_fork)'; \
+	 echo 'weak_alias (__libc_fork, __fork)'; \
+	 echo 'libc_hidden_weak (__fork)'; \
+	 echo 'weak_alias (__libc_fork, fork)'; \
+	 echo 'libc_hidden_weak (fork)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=get_kernel_syms NUMBER=((0x900000 +130)) ARGS=i:p SOURCE=-
+ifeq (,$(filter get_kernel_syms,$(unix-syscalls)))
+unix-syscalls += get_kernel_syms
+unix-extra-syscalls += get_kernel_syms
+$(foreach o,$(object-suffixes),$(objpfx)get_kernel_syms$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-get_kernel_syms$o) $(objpfx)rtld-get_kernel_syms.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (get_kernel_syms, get_kernel_syms, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(get_kernel_syms)'; \
+	 echo 'libc_hidden_def (get_kernel_syms)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter get_kernel_syms,$(bp-thunks)))
+bp-thunks += get_kernel_syms
+$(objpfx)$(bppfx)get_kernel_syms.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define get_kernel_syms(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (get_kernel_syms) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (get_kernel_syms) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (get_kernel_syms) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (get_kernel_syms)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=getegid NUMBER=((0x900000 + 50)) ARGS=i: SOURCE=sysdeps/unix/sysv/linux/arm/getegid.c
+
+#### CALL=geteuid NUMBER=((0x900000 + 49)) ARGS=i: SOURCE=sysdeps/unix/sysv/linux/arm/geteuid.c
+
+#### CALL=getpgid NUMBER=((0x900000 +132)) ARGS=i:i SOURCE=-
+ifeq (,$(filter getpgid,$(unix-syscalls)))
+unix-syscalls += getpgid
+$(foreach o,$(object-suffixes),$(objpfx)getpgid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getpgid$o) $(objpfx)rtld-getpgid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__getpgid, getpgid, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__getpgid)'; \
+	 echo 'libc_hidden_def (__getpgid)'; \
+	 echo 'weak_alias (__getpgid, getpgid)'; \
+	 echo 'libc_hidden_weak (getpgid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getpgrp NUMBER=((0x900000 + 65)) ARGS=i: SOURCE=-
+ifeq (,$(filter getpgrp,$(unix-syscalls)))
+unix-syscalls += getpgrp
+$(foreach o,$(object-suffixes),$(objpfx)getpgrp$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getpgrp$o) $(objpfx)rtld-getpgrp.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_NOERRNO (getpgrp, getpgrp, 0)'; \
+	 echo '	ret_NOERRNO'; \
+	 echo 'PSEUDO_END_NOERRNO(getpgrp)'; \
+	 echo 'libc_hidden_def (getpgrp)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getpmsg NUMBER=- ARGS=i:ipppp SOURCE=-
+
+#### CALL=getppid NUMBER=((0x900000 + 64)) ARGS=i: SOURCE=-
+ifeq (,$(filter getppid,$(unix-syscalls)))
+unix-syscalls += getppid
+$(foreach o,$(object-suffixes),$(objpfx)getppid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getppid$o) $(objpfx)rtld-getppid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_NOERRNO (__getppid, getppid, 0)'; \
+	 echo '	ret_NOERRNO'; \
+	 echo 'PSEUDO_END_NOERRNO(__getppid)'; \
+	 echo 'libc_hidden_def (__getppid)'; \
+	 echo 'weak_alias (__getppid, getppid)'; \
+	 echo 'libc_hidden_weak (getppid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getresuid NUMBER=((0x900000 +165)) ARGS=i:ppp SOURCE=sysdeps/unix/sysv/linux/arm/getresuid.c
+
+#### CALL=getresgid NUMBER=((0x900000 +171)) ARGS=i:ppp SOURCE=sysdeps/unix/sysv/linux/arm/getresgid.c
+
+#### CALL=getsid NUMBER=((0x900000 +147)) ARGS=i:i SOURCE=-
+ifeq (,$(filter getsid,$(unix-syscalls)))
+unix-syscalls += getsid
+$(foreach o,$(object-suffixes),$(objpfx)getsid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getsid$o) $(objpfx)rtld-getsid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (getsid, getsid, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(getsid)'; \
+	 echo 'libc_hidden_def (getsid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=init_module NUMBER=((0x900000 +128)) ARGS=5 SOURCE=-
+ifeq (,$(filter init_module,$(unix-syscalls)))
+unix-syscalls += init_module
+unix-extra-syscalls += init_module
+$(foreach o,$(object-suffixes),$(objpfx)init_module$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-init_module$o) $(objpfx)rtld-init_module.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (init_module, init_module, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(init_module)'; \
+	 echo 'libc_hidden_def (init_module)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=ioperm NUMBER=- ARGS=i:iii SOURCE=sysdeps/unix/sysv/linux/arm/ioperm.c
+
+#### CALL=iopl NUMBER=- ARGS=i:i SOURCE=-
+
+#### CALL=keyctl NUMBER=((0x900000 +311)) ARGS=i:iiiii SOURCE=-
+ifeq (,$(filter keyctl,$(unix-syscalls)))
+unix-syscalls += keyctl
+unix-extra-syscalls += keyctl
+$(foreach o,$(object-suffixes),$(objpfx)keyctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-keyctl$o) $(objpfx)rtld-keyctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (keyctl, keyctl, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(keyctl)'; \
+	 echo 'libc_hidden_def (keyctl)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=klogctl NUMBER=((0x900000 +103)) ARGS=i:isi SOURCE=-
+ifeq (,$(filter klogctl,$(unix-syscalls)))
+unix-syscalls += klogctl
+unix-extra-syscalls += klogctl
+$(foreach o,$(object-suffixes),$(objpfx)klogctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-klogctl$o) $(objpfx)rtld-klogctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (klogctl, syslog, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(klogctl)'; \
+	 echo 'libc_hidden_def (klogctl)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter klogctl,$(bp-thunks)))
+bp-thunks += klogctl
+$(objpfx)$(bppfx)klogctl.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define klogctl(i1, s2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (klogctl) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (klogctl) (__typeof (i1v), __typeof (s2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (klogctl) (i1a, CHECK_STRING (s2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (klogctl)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=lchown NUMBER=((0x900000 + 16)) ARGS=i:sii SOURCE=sysdeps/unix/sysv/linux/arm/lchown.c
+
+#### CALL=posix_madvise NUMBER=((0x900000 +220)) ARGS=i:pii SOURCE=-
+ifeq (,$(filter posix_madvise,$(unix-syscalls)))
+unix-syscalls += posix_madvise
+$(foreach o,$(object-suffixes),$(objpfx)posix_madvise$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-posix_madvise$o) $(objpfx)rtld-posix_madvise.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_ERRVAL (posix_madvise, madvise, 3)'; \
+	 echo '	ret_ERRVAL'; \
+	 echo 'PSEUDO_END_ERRVAL(posix_madvise)'; \
+	 echo 'libc_hidden_def (posix_madvise)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter posix_madvise,$(bp-thunks)))
+bp-thunks += posix_madvise
+$(objpfx)$(bppfx)posix_madvise.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define posix_madvise(p1, i2, i3) i0v; \'; \
+	 echo 'extern p1, p1v; extern i2, i2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (posix_madvise) (__typeof (p1v) *__bounded p1a, __typeof (i2v) i2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (posix_madvise) (__typeof (p1v) *__unbounded, __typeof (i2v), __typeof (i3v)); \'; \
+	 echo '  return (posix_madvise) (CHECK_1 (p1a), i2a, i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (posix_madvise)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=madvise NUMBER=((0x900000 +220)) ARGS=i:pii SOURCE=-
+ifeq (,$(filter madvise,$(unix-syscalls)))
+unix-syscalls += madvise
+$(foreach o,$(object-suffixes),$(objpfx)madvise$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-madvise$o) $(objpfx)rtld-madvise.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (madvise, madvise, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(madvise)'; \
+	 echo 'libc_hidden_def (madvise)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter madvise,$(bp-thunks)))
+bp-thunks += madvise
+$(objpfx)$(bppfx)madvise.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define madvise(p1, i2, i3) i0v; \'; \
+	 echo 'extern p1, p1v; extern i2, i2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (madvise) (__typeof (p1v) *__bounded p1a, __typeof (i2v) i2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (madvise) (__typeof (p1v) *__unbounded, __typeof (i2v), __typeof (i3v)); \'; \
+	 echo '  return (madvise) (CHECK_1 (p1a), i2a, i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (madvise)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mincore NUMBER=((0x900000 +219)) ARGS=i:anV SOURCE=-
+ifeq (,$(filter mincore,$(unix-syscalls)))
+unix-syscalls += mincore
+$(foreach o,$(object-suffixes),$(objpfx)mincore$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mincore$o) $(objpfx)rtld-mincore.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (mincore, mincore, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(mincore)'; \
+	 echo 'libc_hidden_def (mincore)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mincore,$(bp-thunks)))
+bp-thunks += mincore
+$(objpfx)$(bppfx)mincore.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define mincore(a1, n2, V3) i0v; \'; \
+	 echo 'extern char a1v; extern n2, n2v; extern char V3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (mincore) (__typeof (a1v) *__bounded a1a, __typeof (n2v) n2a, __typeof (V3v) *__bounded V3a) { \'; \
+	 echo '  extern __typeof (i0v) (mincore) (__typeof (a1v) *__unbounded, __typeof (n2v), __typeof (V3v) *__unbounded); \'; \
+	 echo '  return (mincore) (__ptrvalue (a1a), n2a, CHECK_N_PAGES (V3a, n2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (mincore)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mlock NUMBER=((0x900000 +150)) ARGS=i:bn SOURCE=-
+ifeq (,$(filter mlock,$(unix-syscalls)))
+unix-syscalls += mlock
+$(foreach o,$(object-suffixes),$(objpfx)mlock$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mlock$o) $(objpfx)rtld-mlock.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (mlock, mlock, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(mlock)'; \
+	 echo 'libc_hidden_def (mlock)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mlock,$(bp-thunks)))
+bp-thunks += mlock
+$(objpfx)$(bppfx)mlock.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define mlock(b1, n2) i0v; \'; \
+	 echo 'extern char b1v; extern n2, n2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (mlock) (__typeof (b1v) *__bounded b1a, __typeof (n2v) n2a) { \'; \
+	 echo '  extern __typeof (i0v) (mlock) (__typeof (b1v) *__unbounded, __typeof (n2v)); \'; \
+	 echo '  return (mlock) (CHECK_N (b1a, n2a), n2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (mlock)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mlockall NUMBER=((0x900000 +152)) ARGS=i:i SOURCE=-
+ifeq (,$(filter mlockall,$(unix-syscalls)))
+unix-syscalls += mlockall
+$(foreach o,$(object-suffixes),$(objpfx)mlockall$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mlockall$o) $(objpfx)rtld-mlockall.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (mlockall, mlockall, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(mlockall)'; \
+	 echo 'libc_hidden_def (mlockall)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=mmap NUMBER=((0x900000 + 90)) ARGS=b:aniiii SOURCE=sysdeps/unix/sysv/linux/arm/mmap.S
+ifeq (,$(filter mmap,$(bp-thunks)))
+bp-thunks += mmap
+$(objpfx)$(bppfx)mmap.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mmap(a1, n2, i3, i4, i5, i6) x0; extern char b0v; \'; \
+	 echo 'extern char a1v; extern n2, n2v; extern i3, i3v; extern i4, i4v; extern i5, i5v; extern i6, i6v; \'; \
+	 echo '__typeof (b0v) *__bounded BP_SYM (__mmap) (__typeof (a1v) *__bounded a1a, __typeof (n2v) n2a, __typeof (i3v) i3a, __typeof (i4v) i4a, __typeof (i5v) i5a, __typeof (i6v) i6a) { \'; \
+	 echo '  extern __typeof (b0v) *__unbounded (__mmap) (__typeof (a1v) *__unbounded, __typeof (n2v), __typeof (i3v), __typeof (i4v), __typeof (i5v), __typeof (i6v)); \'; \
+	 echo '  return BOUNDED_N ((__mmap) (__ptrvalue (a1a), n2a, i3a, i4a, i5a, i6a), n2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mmap)) \'; \
+	 echo 'weak_alias (BP_SYM (__mmap), BP_SYM (mmap)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mmap)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mount NUMBER=((0x900000 + 21)) ARGS=i:sssip SOURCE=-
+ifeq (,$(filter mount,$(unix-syscalls)))
+unix-syscalls += mount
+unix-extra-syscalls += mount
+$(foreach o,$(object-suffixes),$(objpfx)mount$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mount$o) $(objpfx)rtld-mount.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__mount, mount, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__mount)'; \
+	 echo 'libc_hidden_def (__mount)'; \
+	 echo 'weak_alias (__mount, mount)'; \
+	 echo 'libc_hidden_weak (mount)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mount,$(bp-thunks)))
+bp-thunks += mount
+$(objpfx)$(bppfx)mount.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mount(s1, s2, s3, i4, p5) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern char s3v; extern i4, i4v; extern p5, p5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__mount) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (s3v) *__bounded s3a, __typeof (i4v) i4a, __typeof (p5v) *__bounded p5a) { \'; \
+	 echo '  extern __typeof (i0v) (__mount) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (s3v) *__unbounded, __typeof (i4v), __typeof (p5v) *__unbounded); \'; \
+	 echo '  return (__mount) (CHECK_STRING (s1a), CHECK_STRING (s2a), CHECK_STRING (s3a), i4a, CHECK_1 (p5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mount)) \'; \
+	 echo 'weak_alias (BP_SYM (__mount), BP_SYM (mount)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mount)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mremap NUMBER=((0x900000 +163)) ARGS=b:aini SOURCE=-
+ifeq (,$(filter mremap,$(unix-syscalls)))
+unix-syscalls += mremap
+unix-extra-syscalls += mremap
+$(foreach o,$(object-suffixes),$(objpfx)mremap$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mremap$o) $(objpfx)rtld-mremap.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__mremap, mremap, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__mremap)'; \
+	 echo 'libc_hidden_def (__mremap)'; \
+	 echo 'weak_alias (__mremap, mremap)'; \
+	 echo 'libc_hidden_weak (mremap)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mremap,$(bp-thunks)))
+bp-thunks += mremap
+$(objpfx)$(bppfx)mremap.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mremap(a1, i2, n3, i4) x0; extern char b0v; \'; \
+	 echo 'extern char a1v; extern i2, i2v; extern n3, n3v; extern i4, i4v; \'; \
+	 echo '__typeof (b0v) *__bounded BP_SYM (__mremap) (__typeof (a1v) *__bounded a1a, __typeof (i2v) i2a, __typeof (n3v) n3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (b0v) *__unbounded (__mremap) (__typeof (a1v) *__unbounded, __typeof (i2v), __typeof (n3v), __typeof (i4v)); \'; \
+	 echo '  return BOUNDED_N ((__mremap) (__ptrvalue (a1a), i2a, n3a, i4a), n3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mremap)) \'; \
+	 echo 'weak_alias (BP_SYM (__mremap), BP_SYM (mremap)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mremap)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=munlock NUMBER=((0x900000 +151)) ARGS=i:ai SOURCE=-
+ifeq (,$(filter munlock,$(unix-syscalls)))
+unix-syscalls += munlock
+$(foreach o,$(object-suffixes),$(objpfx)munlock$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-munlock$o) $(objpfx)rtld-munlock.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (munlock, munlock, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(munlock)'; \
+	 echo 'libc_hidden_def (munlock)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter munlock,$(bp-thunks)))
+bp-thunks += munlock
+$(objpfx)$(bppfx)munlock.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define munlock(a1, i2) i0v; \'; \
+	 echo 'extern char a1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (munlock) (__typeof (a1v) *__bounded a1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (munlock) (__typeof (a1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (munlock) (__ptrvalue (a1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (munlock)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=munlockall NUMBER=((0x900000 +153)) ARGS=i: SOURCE=-
+ifeq (,$(filter munlockall,$(unix-syscalls)))
+unix-syscalls += munlockall
+$(foreach o,$(object-suffixes),$(objpfx)munlockall$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-munlockall$o) $(objpfx)rtld-munlockall.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (munlockall, munlockall, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(munlockall)'; \
+	 echo 'libc_hidden_def (munlockall)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=nanosleep NUMBER=((0x900000 +162)) ARGS=i:pp SOURCE=-
+ifeq (,$(filter nanosleep,$(unix-syscalls)))
+unix-syscalls += nanosleep
+$(foreach o,$(object-suffixes),$(objpfx)nanosleep$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-nanosleep$o) $(objpfx)rtld-nanosleep.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_nanosleep, nanosleep, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_nanosleep)'; \
+	 echo 'libc_hidden_def (__libc_nanosleep)'; \
+	 echo 'weak_alias (__libc_nanosleep, __nanosleep)'; \
+	 echo 'libc_hidden_weak (__nanosleep)'; \
+	 echo 'weak_alias (__libc_nanosleep, nanosleep)'; \
+	 echo 'libc_hidden_weak (nanosleep)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter nanosleep,$(bp-thunks)))
+bp-thunks += nanosleep
+$(objpfx)$(bppfx)nanosleep.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __nanosleep(p1, p2) i0v; \'; \
+	 echo 'extern p1, p1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_nanosleep) (__typeof (p1v) *__bounded p1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__nanosleep) (__typeof (p1v) *__unbounded, __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__nanosleep) (CHECK_1 (p1a), CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_nanosleep)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_nanosleep), BP_SYM (__nanosleep)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__nanosleep)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_nanosleep), BP_SYM (nanosleep)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (nanosleep)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=nfsservctl NUMBER=((0x900000 +169)) ARGS=i:ipp SOURCE=-
+ifeq (,$(filter nfsservctl,$(unix-syscalls)))
+unix-syscalls += nfsservctl
+unix-extra-syscalls += nfsservctl
+$(foreach o,$(object-suffixes),$(objpfx)nfsservctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-nfsservctl$o) $(objpfx)rtld-nfsservctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (nfsservctl, nfsservctl, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(nfsservctl)'; \
+	 echo 'libc_hidden_def (nfsservctl)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter nfsservctl,$(bp-thunks)))
+bp-thunks += nfsservctl
+$(objpfx)$(bppfx)nfsservctl.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define nfsservctl(i1, p2, p3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern p3, p3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (nfsservctl) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (p3v) *__bounded p3a) { \'; \
+	 echo '  extern __typeof (i0v) (nfsservctl) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (p3v) *__unbounded); \'; \
+	 echo '  return (nfsservctl) (i1a, CHECK_1 (p2a), CHECK_1 (p3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (nfsservctl)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=pause NUMBER=((0x900000 + 29)) ARGS=i: SOURCE=-
+ifeq (,$(filter pause,$(unix-syscalls)))
+unix-syscalls += pause
+$(foreach o,$(object-suffixes),$(objpfx)pause$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-pause$o) $(objpfx)rtld-pause.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_pause, pause, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_pause)'; \
+	 echo 'libc_hidden_def (__libc_pause)'; \
+	 echo 'weak_alias (__libc_pause, pause)'; \
+	 echo 'libc_hidden_weak (pause)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=personality NUMBER=((0x900000 +136)) ARGS=i:i SOURCE=-
+ifeq (,$(filter personality,$(unix-syscalls)))
+unix-syscalls += personality
+unix-extra-syscalls += personality
+$(foreach o,$(object-suffixes),$(objpfx)personality$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-personality$o) $(objpfx)rtld-personality.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__personality, personality, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__personality)'; \
+	 echo 'libc_hidden_def (__personality)'; \
+	 echo 'weak_alias (__personality, personality)'; \
+	 echo 'libc_hidden_weak (personality)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=pipe NUMBER=((0x900000 + 42)) ARGS=i:f SOURCE=-
+ifeq (,$(filter pipe,$(unix-syscalls)))
+unix-syscalls += pipe
+$(foreach o,$(object-suffixes),$(objpfx)pipe$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-pipe$o) $(objpfx)rtld-pipe.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__pipe, pipe, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__pipe)'; \
+	 echo 'libc_hidden_def (__pipe)'; \
+	 echo 'weak_alias (__pipe, pipe)'; \
+	 echo 'libc_hidden_weak (pipe)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter pipe,$(bp-thunks)))
+bp-thunks += pipe
+$(objpfx)$(bppfx)pipe.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __pipe(f1) i0v; \'; \
+	 echo 'extern f1, f1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__pipe) (__typeof (f1v) *__bounded f1a) { \'; \
+	 echo '  extern __typeof (i0v) (__pipe) (__typeof (f1v) *__unbounded); \'; \
+	 echo '  return (__pipe) (CHECK_N (f1a, 2)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__pipe)) \'; \
+	 echo 'weak_alias (BP_SYM (__pipe), BP_SYM (pipe)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (pipe)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=pivot_root NUMBER=((0x900000 +218)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter pivot_root,$(unix-syscalls)))
+unix-syscalls += pivot_root
+unix-extra-syscalls += pivot_root
+$(foreach o,$(object-suffixes),$(objpfx)pivot_root$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-pivot_root$o) $(objpfx)rtld-pivot_root.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (pivot_root, pivot_root, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(pivot_root)'; \
+	 echo 'libc_hidden_def (pivot_root)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter pivot_root,$(bp-thunks)))
+bp-thunks += pivot_root
+$(objpfx)$(bppfx)pivot_root.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define pivot_root(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (pivot_root) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (pivot_root) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (pivot_root) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (pivot_root)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=prctl NUMBER=((0x900000 +172)) ARGS=i:iiiii SOURCE=-
+ifeq (,$(filter prctl,$(unix-syscalls)))
+unix-syscalls += prctl
+unix-extra-syscalls += prctl
+$(foreach o,$(object-suffixes),$(objpfx)prctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-prctl$o) $(objpfx)rtld-prctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__prctl, prctl, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__prctl)'; \
+	 echo 'libc_hidden_def (__prctl)'; \
+	 echo 'weak_alias (__prctl, prctl)'; \
+	 echo 'libc_hidden_weak (prctl)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=putpmsg NUMBER=- ARGS=i:ippii SOURCE=-
+
+#### CALL=query_module NUMBER=((0x900000 +167)) ARGS=i:sipip SOURCE=-
+ifeq (,$(filter query_module,$(unix-syscalls)))
+unix-syscalls += query_module
+unix-extra-syscalls += query_module
+$(foreach o,$(object-suffixes),$(objpfx)query_module$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-query_module$o) $(objpfx)rtld-query_module.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (query_module, query_module, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(query_module)'; \
+	 echo 'libc_hidden_def (query_module)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter query_module,$(bp-thunks)))
+bp-thunks += query_module
+$(objpfx)$(bppfx)query_module.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define query_module(s1, i2, p3, i4, p5) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; extern p3, p3v; extern i4, i4v; extern p5, p5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (query_module) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a, __typeof (p5v) *__bounded p5a) { \'; \
+	 echo '  extern __typeof (i0v) (query_module) (__typeof (s1v) *__unbounded, __typeof (i2v), __typeof (p3v) *__unbounded, __typeof (i4v), __typeof (p5v) *__unbounded); \'; \
+	 echo '  return (query_module) (CHECK_STRING (s1a), i2a, CHECK_1 (p3a), i4a, CHECK_1 (p5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (query_module)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=quotactl NUMBER=((0x900000 +131)) ARGS=i:isip SOURCE=-
+ifeq (,$(filter quotactl,$(unix-syscalls)))
+unix-syscalls += quotactl
+unix-extra-syscalls += quotactl
+$(foreach o,$(object-suffixes),$(objpfx)quotactl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-quotactl$o) $(objpfx)rtld-quotactl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (quotactl, quotactl, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(quotactl)'; \
+	 echo 'libc_hidden_def (quotactl)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter quotactl,$(bp-thunks)))
+bp-thunks += quotactl
+$(objpfx)$(bppfx)quotactl.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define quotactl(i1, s2, i3, p4) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; extern i3, i3v; extern p4, p4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (quotactl) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a, __typeof (i3v) i3a, __typeof (p4v) *__bounded p4a) { \'; \
+	 echo '  extern __typeof (i0v) (quotactl) (__typeof (i1v), __typeof (s2v) *__unbounded, __typeof (i3v), __typeof (p4v) *__unbounded); \'; \
+	 echo '  return (quotactl) (i1a, CHECK_STRING (s2a), i3a, CHECK_1 (p4a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (quotactl)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=remap_file_pages NUMBER=((0x900000 +253)) ARGS=i:piiii SOURCE=-
+ifeq (,$(filter remap_file_pages,$(unix-syscalls)))
+unix-syscalls += remap_file_pages
+$(foreach o,$(object-suffixes),$(objpfx)remap_file_pages$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-remap_file_pages$o) $(objpfx)rtld-remap_file_pages.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__remap_file_pages, remap_file_pages, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__remap_file_pages)'; \
+	 echo 'libc_hidden_def (__remap_file_pages)'; \
+	 echo 'weak_alias (__remap_file_pages, remap_file_pages)'; \
+	 echo 'libc_hidden_weak (remap_file_pages)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter remap_file_pages,$(bp-thunks)))
+bp-thunks += remap_file_pages
+$(objpfx)$(bppfx)remap_file_pages.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define remap_file_pages(p1, i2, i3, i4, i5) i0v; \'; \
+	 echo 'extern p1, p1v; extern i2, i2v; extern i3, i3v; extern i4, i4v; extern i5, i5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__remap_file_pages) (__typeof (p1v) *__bounded p1a, __typeof (i2v) i2a, __typeof (i3v) i3a, __typeof (i4v) i4a, __typeof (i5v) i5a) { \'; \
+	 echo '  extern __typeof (i0v) (remap_file_pages) (__typeof (p1v) *__unbounded, __typeof (i2v), __typeof (i3v), __typeof (i4v), __typeof (i5v)); \'; \
+	 echo '  return (remap_file_pages) (CHECK_1 (p1a), i2a, i3a, i4a, i5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__remap_file_pages)) \'; \
+	 echo 'weak_alias (BP_SYM (__remap_file_pages), BP_SYM (remap_file_pages)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (remap_file_pages)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=request_key NUMBER=((0x900000 +310)) ARGS=i:pppi SOURCE=-
+ifeq (,$(filter request_key,$(unix-syscalls)))
+unix-syscalls += request_key
+unix-extra-syscalls += request_key
+$(foreach o,$(object-suffixes),$(objpfx)request_key$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-request_key$o) $(objpfx)rtld-request_key.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (request_key, request_key, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(request_key)'; \
+	 echo 'libc_hidden_def (request_key)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter request_key,$(bp-thunks)))
+bp-thunks += request_key
+$(objpfx)$(bppfx)request_key.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define request_key(p1, p2, p3, i4) i0v; \'; \
+	 echo 'extern p1, p1v; extern p2, p2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (request_key) (__typeof (p1v) *__bounded p1a, __typeof (p2v) *__bounded p2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (request_key) (__typeof (p1v) *__unbounded, __typeof (p2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (request_key) (CHECK_1 (p1a), CHECK_1 (p2a), CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (request_key)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sched_getp NUMBER=((0x900000 +155)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter sched_getp,$(unix-syscalls)))
+unix-syscalls += sched_getp
+$(foreach o,$(object-suffixes),$(objpfx)sched_getp$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_getp$o) $(objpfx)rtld-sched_getp.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_getparam, sched_getparam, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_getparam)'; \
+	 echo 'libc_hidden_def (__sched_getparam)'; \
+	 echo 'weak_alias (__sched_getparam, sched_getparam)'; \
+	 echo 'libc_hidden_weak (sched_getparam)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sched_getp,$(bp-thunks)))
+bp-thunks += sched_getp
+$(objpfx)$(bppfx)sched_getp.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sched_getparam(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__sched_getparam) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (sched_getparam) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (sched_getparam) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__sched_getparam)) \'; \
+	 echo 'weak_alias (BP_SYM (__sched_getparam), BP_SYM (sched_getparam)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sched_getparam)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sched_gets NUMBER=((0x900000 +157)) ARGS=i:i SOURCE=-
+ifeq (,$(filter sched_gets,$(unix-syscalls)))
+unix-syscalls += sched_gets
+$(foreach o,$(object-suffixes),$(objpfx)sched_gets$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_gets$o) $(objpfx)rtld-sched_gets.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_getscheduler, sched_getscheduler, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_getscheduler)'; \
+	 echo 'libc_hidden_def (__sched_getscheduler)'; \
+	 echo 'weak_alias (__sched_getscheduler, sched_getscheduler)'; \
+	 echo 'libc_hidden_weak (sched_getscheduler)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=sched_primax NUMBER=((0x900000 +159)) ARGS=i:i SOURCE=-
+ifeq (,$(filter sched_primax,$(unix-syscalls)))
+unix-syscalls += sched_primax
+$(foreach o,$(object-suffixes),$(objpfx)sched_primax$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_primax$o) $(objpfx)rtld-sched_primax.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_get_priority_max, sched_get_priority_max, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_get_priority_max)'; \
+	 echo 'libc_hidden_def (__sched_get_priority_max)'; \
+	 echo 'weak_alias (__sched_get_priority_max, sched_get_priority_max)'; \
+	 echo 'libc_hidden_weak (sched_get_priority_max)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=sched_primin NUMBER=((0x900000 +160)) ARGS=i:i SOURCE=-
+ifeq (,$(filter sched_primin,$(unix-syscalls)))
+unix-syscalls += sched_primin
+$(foreach o,$(object-suffixes),$(objpfx)sched_primin$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_primin$o) $(objpfx)rtld-sched_primin.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_get_priority_min, sched_get_priority_min, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_get_priority_min)'; \
+	 echo 'libc_hidden_def (__sched_get_priority_min)'; \
+	 echo 'weak_alias (__sched_get_priority_min, sched_get_priority_min)'; \
+	 echo 'libc_hidden_weak (sched_get_priority_min)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=sched_rr_gi NUMBER=((0x900000 +161)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter sched_rr_gi,$(unix-syscalls)))
+unix-syscalls += sched_rr_gi
+$(foreach o,$(object-suffixes),$(objpfx)sched_rr_gi$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_rr_gi$o) $(objpfx)rtld-sched_rr_gi.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_rr_get_interval, sched_rr_get_interval, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_rr_get_interval)'; \
+	 echo 'libc_hidden_def (__sched_rr_get_interval)'; \
+	 echo 'weak_alias (__sched_rr_get_interval, sched_rr_get_interval)'; \
+	 echo 'libc_hidden_weak (sched_rr_get_interval)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sched_rr_gi,$(bp-thunks)))
+bp-thunks += sched_rr_gi
+$(objpfx)$(bppfx)sched_rr_gi.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sched_rr_get_interval(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__sched_rr_get_interval) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (sched_rr_get_interval) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (sched_rr_get_interval) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__sched_rr_get_interval)) \'; \
+	 echo 'weak_alias (BP_SYM (__sched_rr_get_interval), BP_SYM (sched_rr_get_interval)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sched_rr_get_interval)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sched_setp NUMBER=((0x900000 +154)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter sched_setp,$(unix-syscalls)))
+unix-syscalls += sched_setp
+$(foreach o,$(object-suffixes),$(objpfx)sched_setp$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_setp$o) $(objpfx)rtld-sched_setp.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_setparam, sched_setparam, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_setparam)'; \
+	 echo 'libc_hidden_def (__sched_setparam)'; \
+	 echo 'weak_alias (__sched_setparam, sched_setparam)'; \
+	 echo 'libc_hidden_weak (sched_setparam)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sched_setp,$(bp-thunks)))
+bp-thunks += sched_setp
+$(objpfx)$(bppfx)sched_setp.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sched_setparam(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__sched_setparam) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (sched_setparam) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (sched_setparam) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__sched_setparam)) \'; \
+	 echo 'weak_alias (BP_SYM (__sched_setparam), BP_SYM (sched_setparam)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sched_setparam)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sched_sets NUMBER=((0x900000 +156)) ARGS=i:iip SOURCE=-
+ifeq (,$(filter sched_sets,$(unix-syscalls)))
+unix-syscalls += sched_sets
+$(foreach o,$(object-suffixes),$(objpfx)sched_sets$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_sets$o) $(objpfx)rtld-sched_sets.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_setscheduler, sched_setscheduler, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_setscheduler)'; \
+	 echo 'libc_hidden_def (__sched_setscheduler)'; \
+	 echo 'weak_alias (__sched_setscheduler, sched_setscheduler)'; \
+	 echo 'libc_hidden_weak (sched_setscheduler)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sched_sets,$(bp-thunks)))
+bp-thunks += sched_sets
+$(objpfx)$(bppfx)sched_sets.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sched_setscheduler(i1, i2, p3) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern p3, p3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__sched_setscheduler) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (p3v) *__bounded p3a) { \'; \
+	 echo '  extern __typeof (i0v) (sched_setscheduler) (__typeof (i1v), __typeof (i2v), __typeof (p3v) *__unbounded); \'; \
+	 echo '  return (sched_setscheduler) (i1a, i2a, CHECK_1 (p3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__sched_setscheduler)) \'; \
+	 echo 'weak_alias (BP_SYM (__sched_setscheduler), BP_SYM (sched_setscheduler)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sched_setscheduler)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sched_yield NUMBER=((0x900000 +158)) ARGS=i: SOURCE=-
+ifeq (,$(filter sched_yield,$(unix-syscalls)))
+unix-syscalls += sched_yield
+$(foreach o,$(object-suffixes),$(objpfx)sched_yield$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sched_yield$o) $(objpfx)rtld-sched_yield.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sched_yield, sched_yield, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sched_yield)'; \
+	 echo 'libc_hidden_def (__sched_yield)'; \
+	 echo 'weak_alias (__sched_yield, sched_yield)'; \
+	 echo 'libc_hidden_weak (sched_yield)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=select NUMBER=((0x900000 +142)) ARGS=i:iPPPP SOURCE=-
+ifeq (,$(filter select,$(unix-syscalls)))
+unix-syscalls += select
+$(foreach o,$(object-suffixes),$(objpfx)select$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-select$o) $(objpfx)rtld-select.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__select, _newselect, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__select)'; \
+	 echo 'libc_hidden_def (__select)'; \
+	 echo 'weak_alias (__select, __libc_select)'; \
+	 echo 'libc_hidden_weak (__libc_select)'; \
+	 echo 'weak_alias (__select, select)'; \
+	 echo 'libc_hidden_weak (select)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter select,$(bp-thunks)))
+bp-thunks += select
+$(objpfx)$(bppfx)select.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __select(i1, P2, P3, P4, P5) i0v; \'; \
+	 echo 'extern i1, i1v; extern P2, P2v; extern P3, P3v; extern P4, P4v; extern P5, P5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__select) (__typeof (i1v) i1a, __typeof (P2v) *__bounded P2a, __typeof (P3v) *__bounded P3a, __typeof (P4v) *__bounded P4a, __typeof (P5v) *__bounded P5a) { \'; \
+	 echo '  extern __typeof (i0v) (__select) (__typeof (i1v), __typeof (P2v) *__unbounded, __typeof (P3v) *__unbounded, __typeof (P4v) *__unbounded, __typeof (P5v) *__unbounded); \'; \
+	 echo '  return (__select) (i1a, CHECK_1_NULL_OK (P2a), CHECK_1_NULL_OK (P3a), CHECK_1_NULL_OK (P4a), CHECK_1_NULL_OK (P5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__select)) \'; \
+	 echo 'weak_alias (BP_SYM (__select), BP_SYM (__libc_select)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__libc_select)) \'; \
+	 echo 'weak_alias (BP_SYM (__select), BP_SYM (select)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (select)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sendfile NUMBER=((0x900000 +187)) ARGS=i:iipi SOURCE=-
+ifeq (,$(filter sendfile,$(unix-syscalls)))
+unix-syscalls += sendfile
+$(foreach o,$(object-suffixes),$(objpfx)sendfile$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sendfile$o) $(objpfx)rtld-sendfile.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (sendfile, sendfile, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(sendfile)'; \
+	 echo 'libc_hidden_def (sendfile)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sendfile,$(bp-thunks)))
+bp-thunks += sendfile
+$(objpfx)$(bppfx)sendfile.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sendfile(i1, i2, p3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (sendfile) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (sendfile) (__typeof (i1v), __typeof (i2v), __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (sendfile) (i1a, i2a, CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (sendfile)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sendfile64 NUMBER=((0x900000 +239)) ARGS=i:iipi SOURCE=-
+ifeq (,$(filter sendfile64,$(unix-syscalls)))
+unix-syscalls += sendfile64
+$(foreach o,$(object-suffixes),$(objpfx)sendfile64$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sendfile64$o) $(objpfx)rtld-sendfile64.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (sendfile64, sendfile64, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(sendfile64)'; \
+	 echo 'libc_hidden_def (sendfile64)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sendfile64,$(bp-thunks)))
+bp-thunks += sendfile64
+$(objpfx)$(bppfx)sendfile64.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sendfile64(i1, i2, p3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (sendfile64) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (sendfile64) (__typeof (i1v), __typeof (i2v), __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (sendfile64) (i1a, i2a, CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (sendfile64)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setfsgid NUMBER=((0x900000 +139)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/setfsgid.c
+
+#### CALL=setfsuid NUMBER=((0x900000 +138)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/setfsuid.c
+
+#### CALL=setpgid NUMBER=((0x900000 + 57)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter setpgid,$(unix-syscalls)))
+unix-syscalls += setpgid
+$(foreach o,$(object-suffixes),$(objpfx)setpgid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setpgid$o) $(objpfx)rtld-setpgid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__setpgid, setpgid, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__setpgid)'; \
+	 echo 'libc_hidden_def (__setpgid)'; \
+	 echo 'weak_alias (__setpgid, setpgid)'; \
+	 echo 'libc_hidden_weak (setpgid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=sigaltstack NUMBER=((0x900000 +186)) ARGS=i:PP SOURCE=-
+ifeq (,$(filter sigaltstack,$(unix-syscalls)))
+unix-syscalls += sigaltstack
+$(foreach o,$(object-suffixes),$(objpfx)sigaltstack$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sigaltstack$o) $(objpfx)rtld-sigaltstack.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__sigaltstack, sigaltstack, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__sigaltstack)'; \
+	 echo 'libc_hidden_def (__sigaltstack)'; \
+	 echo 'weak_alias (__sigaltstack, sigaltstack)'; \
+	 echo 'libc_hidden_weak (sigaltstack)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sigaltstack,$(bp-thunks)))
+bp-thunks += sigaltstack
+$(objpfx)$(bppfx)sigaltstack.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __sigaltstack(P1, P2) i0v; \'; \
+	 echo 'extern P1, P1v; extern P2, P2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__sigaltstack) (__typeof (P1v) *__bounded P1a, __typeof (P2v) *__bounded P2a) { \'; \
+	 echo '  extern __typeof (i0v) (__sigaltstack) (__typeof (P1v) *__unbounded, __typeof (P2v) *__unbounded); \'; \
+	 echo '  return (__sigaltstack) (CHECK_1_NULL_OK (P1a), CHECK_1_NULL_OK (P2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__sigaltstack)) \'; \
+	 echo 'weak_alias (BP_SYM (__sigaltstack), BP_SYM (sigaltstack)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sigaltstack)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sysinfo NUMBER=((0x900000 +116)) ARGS=i:p SOURCE=-
+ifeq (,$(filter sysinfo,$(unix-syscalls)))
+unix-syscalls += sysinfo
+unix-extra-syscalls += sysinfo
+$(foreach o,$(object-suffixes),$(objpfx)sysinfo$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sysinfo$o) $(objpfx)rtld-sysinfo.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (sysinfo, sysinfo, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(sysinfo)'; \
+	 echo 'libc_hidden_def (sysinfo)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sysinfo,$(bp-thunks)))
+bp-thunks += sysinfo
+$(objpfx)$(bppfx)sysinfo.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sysinfo(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (sysinfo) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (sysinfo) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (sysinfo) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (sysinfo)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=swapon NUMBER=((0x900000 + 87)) ARGS=i:si SOURCE=-
+ifeq (,$(filter swapon,$(unix-syscalls)))
+unix-syscalls += swapon
+$(foreach o,$(object-suffixes),$(objpfx)swapon$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-swapon$o) $(objpfx)rtld-swapon.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__swapon, swapon, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__swapon)'; \
+	 echo 'libc_hidden_def (__swapon)'; \
+	 echo 'weak_alias (__swapon, swapon)'; \
+	 echo 'libc_hidden_weak (swapon)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter swapon,$(bp-thunks)))
+bp-thunks += swapon
+$(objpfx)$(bppfx)swapon.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __swapon(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__swapon) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__swapon) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__swapon) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__swapon)) \'; \
+	 echo 'weak_alias (BP_SYM (__swapon), BP_SYM (swapon)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (swapon)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=swapoff NUMBER=((0x900000 +115)) ARGS=i:s SOURCE=-
+ifeq (,$(filter swapoff,$(unix-syscalls)))
+unix-syscalls += swapoff
+$(foreach o,$(object-suffixes),$(objpfx)swapoff$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-swapoff$o) $(objpfx)rtld-swapoff.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__swapoff, swapoff, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__swapoff)'; \
+	 echo 'libc_hidden_def (__swapoff)'; \
+	 echo 'weak_alias (__swapoff, swapoff)'; \
+	 echo 'libc_hidden_weak (swapoff)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter swapoff,$(bp-thunks)))
+bp-thunks += swapoff
+$(objpfx)$(bppfx)swapoff.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __swapoff(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__swapoff) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (__swapoff) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (__swapoff) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__swapoff)) \'; \
+	 echo 'weak_alias (BP_SYM (__swapoff), BP_SYM (swapoff)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (swapoff)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=uselib NUMBER=((0x900000 + 86)) ARGS=i:s SOURCE=-
+ifeq (,$(filter uselib,$(unix-syscalls)))
+unix-syscalls += uselib
+unix-extra-syscalls += uselib
+$(foreach o,$(object-suffixes),$(objpfx)uselib$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-uselib$o) $(objpfx)rtld-uselib.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (uselib, uselib, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(uselib)'; \
+	 echo 'libc_hidden_def (uselib)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter uselib,$(bp-thunks)))
+bp-thunks += uselib
+$(objpfx)$(bppfx)uselib.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define uselib(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (uselib) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (uselib) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (uselib) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (uselib)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=wait4 NUMBER=((0x900000 +114)) ARGS=i:iWiP SOURCE=-
+ifeq (,$(filter wait4,$(unix-syscalls)))
+unix-syscalls += wait4
+$(foreach o,$(object-suffixes),$(objpfx)wait4$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-wait4$o) $(objpfx)rtld-wait4.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__wait4, wait4, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__wait4)'; \
+	 echo 'libc_hidden_def (__wait4)'; \
+	 echo 'weak_alias (__wait4, wait4)'; \
+	 echo 'libc_hidden_weak (wait4)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter wait4,$(bp-thunks)))
+bp-thunks += wait4
+$(objpfx)$(bppfx)wait4.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __wait4(i1, W2, i3, P4) i0v; \'; \
+	 echo 'extern i1, i1v; extern int W2v; extern i3, i3v; extern P4, P4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__wait4) (__typeof (i1v) i1a, __typeof (W2v) *__bounded W2a, __typeof (i3v) i3a, __typeof (P4v) *__bounded P4a) { \'; \
+	 echo '  extern __typeof (i0v) (__wait4) (__typeof (i1v), __typeof (W2v) *__unbounded, __typeof (i3v), __typeof (P4v) *__unbounded); \'; \
+	 echo '  return (__wait4) (i1a, CHECK_1_NULL_OK (W2a), i3a, CHECK_1_NULL_OK (P4a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__wait4)) \'; \
+	 echo 'weak_alias (BP_SYM (__wait4), BP_SYM (wait4)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (wait4)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=chown NUMBER=((0x900000 +182)) ARGS=i:sii SOURCE=sysdeps/unix/sysv/linux/arm/chown.c
+
+#### CALL=setxattr NUMBER=((0x900000 +226)) ARGS=i:sspii SOURCE=-
+ifeq (,$(filter setxattr,$(unix-syscalls)))
+unix-syscalls += setxattr
+$(foreach o,$(object-suffixes),$(objpfx)setxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setxattr$o) $(objpfx)rtld-setxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (setxattr, setxattr, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(setxattr)'; \
+	 echo 'libc_hidden_def (setxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter setxattr,$(bp-thunks)))
+bp-thunks += setxattr
+$(objpfx)$(bppfx)setxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define setxattr(s1, s2, p3, i4, i5) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern p3, p3v; extern i4, i4v; extern i5, i5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (setxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a, __typeof (i5v) i5a) { \'; \
+	 echo '  extern __typeof (i0v) (setxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v), __typeof (i5v)); \'; \
+	 echo '  return (setxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), CHECK_1 (p3a), i4a, i5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (setxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=lsetxattr NUMBER=((0x900000 +227)) ARGS=i:sspii SOURCE=-
+ifeq (,$(filter lsetxattr,$(unix-syscalls)))
+unix-syscalls += lsetxattr
+$(foreach o,$(object-suffixes),$(objpfx)lsetxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-lsetxattr$o) $(objpfx)rtld-lsetxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (lsetxattr, lsetxattr, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(lsetxattr)'; \
+	 echo 'libc_hidden_def (lsetxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter lsetxattr,$(bp-thunks)))
+bp-thunks += lsetxattr
+$(objpfx)$(bppfx)lsetxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define lsetxattr(s1, s2, p3, i4, i5) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern p3, p3v; extern i4, i4v; extern i5, i5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (lsetxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a, __typeof (i5v) i5a) { \'; \
+	 echo '  extern __typeof (i0v) (lsetxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v), __typeof (i5v)); \'; \
+	 echo '  return (lsetxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), CHECK_1 (p3a), i4a, i5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (lsetxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=fsetxattr NUMBER=((0x900000 +228)) ARGS=i:ispii SOURCE=-
+ifeq (,$(filter fsetxattr,$(unix-syscalls)))
+unix-syscalls += fsetxattr
+$(foreach o,$(object-suffixes),$(objpfx)fsetxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fsetxattr$o) $(objpfx)rtld-fsetxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (fsetxattr, fsetxattr, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(fsetxattr)'; \
+	 echo 'libc_hidden_def (fsetxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter fsetxattr,$(bp-thunks)))
+bp-thunks += fsetxattr
+$(objpfx)$(bppfx)fsetxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define fsetxattr(i1, s2, p3, i4, i5) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; extern p3, p3v; extern i4, i4v; extern i5, i5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (fsetxattr) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a, __typeof (i5v) i5a) { \'; \
+	 echo '  extern __typeof (i0v) (fsetxattr) (__typeof (i1v), __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v), __typeof (i5v)); \'; \
+	 echo '  return (fsetxattr) (i1a, CHECK_STRING (s2a), CHECK_1 (p3a), i4a, i5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (fsetxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=getxattr NUMBER=((0x900000 +229)) ARGS=i:sspi SOURCE=-
+ifeq (,$(filter getxattr,$(unix-syscalls)))
+unix-syscalls += getxattr
+$(foreach o,$(object-suffixes),$(objpfx)getxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getxattr$o) $(objpfx)rtld-getxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (getxattr, getxattr, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(getxattr)'; \
+	 echo 'libc_hidden_def (getxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter getxattr,$(bp-thunks)))
+bp-thunks += getxattr
+$(objpfx)$(bppfx)getxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define getxattr(s1, s2, p3, i4) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (getxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (getxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (getxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (getxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=lgetxattr NUMBER=((0x900000 +230)) ARGS=i:sspi SOURCE=-
+ifeq (,$(filter lgetxattr,$(unix-syscalls)))
+unix-syscalls += lgetxattr
+$(foreach o,$(object-suffixes),$(objpfx)lgetxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-lgetxattr$o) $(objpfx)rtld-lgetxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (lgetxattr, lgetxattr, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(lgetxattr)'; \
+	 echo 'libc_hidden_def (lgetxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter lgetxattr,$(bp-thunks)))
+bp-thunks += lgetxattr
+$(objpfx)$(bppfx)lgetxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define lgetxattr(s1, s2, p3, i4) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (lgetxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (lgetxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (lgetxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (lgetxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=fgetxattr NUMBER=((0x900000 +231)) ARGS=i:ispi SOURCE=-
+ifeq (,$(filter fgetxattr,$(unix-syscalls)))
+unix-syscalls += fgetxattr
+$(foreach o,$(object-suffixes),$(objpfx)fgetxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fgetxattr$o) $(objpfx)rtld-fgetxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (fgetxattr, fgetxattr, 4)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(fgetxattr)'; \
+	 echo 'libc_hidden_def (fgetxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter fgetxattr,$(bp-thunks)))
+bp-thunks += fgetxattr
+$(objpfx)$(bppfx)fgetxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define fgetxattr(i1, s2, p3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; extern p3, p3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (fgetxattr) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a, __typeof (p3v) *__bounded p3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (fgetxattr) (__typeof (i1v), __typeof (s2v) *__unbounded, __typeof (p3v) *__unbounded, __typeof (i4v)); \'; \
+	 echo '  return (fgetxattr) (i1a, CHECK_STRING (s2a), CHECK_1 (p3a), i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (fgetxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=listxattr NUMBER=((0x900000 +232)) ARGS=i:ssi SOURCE=-
+ifeq (,$(filter listxattr,$(unix-syscalls)))
+unix-syscalls += listxattr
+$(foreach o,$(object-suffixes),$(objpfx)listxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-listxattr$o) $(objpfx)rtld-listxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (listxattr, listxattr, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(listxattr)'; \
+	 echo 'libc_hidden_def (listxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter listxattr,$(bp-thunks)))
+bp-thunks += listxattr
+$(objpfx)$(bppfx)listxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define listxattr(s1, s2, i3) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (listxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (listxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (listxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (listxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=llistxattr NUMBER=((0x900000 +233)) ARGS=i:ssi SOURCE=-
+ifeq (,$(filter llistxattr,$(unix-syscalls)))
+unix-syscalls += llistxattr
+$(foreach o,$(object-suffixes),$(objpfx)llistxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-llistxattr$o) $(objpfx)rtld-llistxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (llistxattr, llistxattr, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(llistxattr)'; \
+	 echo 'libc_hidden_def (llistxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter llistxattr,$(bp-thunks)))
+bp-thunks += llistxattr
+$(objpfx)$(bppfx)llistxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define llistxattr(s1, s2, i3) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (llistxattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (llistxattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (llistxattr) (CHECK_STRING (s1a), CHECK_STRING (s2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (llistxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=flistxattr NUMBER=((0x900000 +234)) ARGS=i:isi SOURCE=-
+ifeq (,$(filter flistxattr,$(unix-syscalls)))
+unix-syscalls += flistxattr
+$(foreach o,$(object-suffixes),$(objpfx)flistxattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-flistxattr$o) $(objpfx)rtld-flistxattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (flistxattr, flistxattr, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(flistxattr)'; \
+	 echo 'libc_hidden_def (flistxattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter flistxattr,$(bp-thunks)))
+bp-thunks += flistxattr
+$(objpfx)$(bppfx)flistxattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define flistxattr(i1, s2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (flistxattr) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (flistxattr) (__typeof (i1v), __typeof (s2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (flistxattr) (i1a, CHECK_STRING (s2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (flistxattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=removexattr NUMBER=((0x900000 +235)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter removexattr,$(unix-syscalls)))
+unix-syscalls += removexattr
+$(foreach o,$(object-suffixes),$(objpfx)removexattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-removexattr$o) $(objpfx)rtld-removexattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (removexattr, removexattr, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(removexattr)'; \
+	 echo 'libc_hidden_def (removexattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter removexattr,$(bp-thunks)))
+bp-thunks += removexattr
+$(objpfx)$(bppfx)removexattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define removexattr(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (removexattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (removexattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (removexattr) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (removexattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=lremovexattr NUMBER=((0x900000 +236)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter lremovexattr,$(unix-syscalls)))
+unix-syscalls += lremovexattr
+$(foreach o,$(object-suffixes),$(objpfx)lremovexattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-lremovexattr$o) $(objpfx)rtld-lremovexattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (lremovexattr, lremovexattr, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(lremovexattr)'; \
+	 echo 'libc_hidden_def (lremovexattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter lremovexattr,$(bp-thunks)))
+bp-thunks += lremovexattr
+$(objpfx)$(bppfx)lremovexattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define lremovexattr(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (lremovexattr) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (lremovexattr) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (lremovexattr) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (lremovexattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=fremovexattr NUMBER=((0x900000 +237)) ARGS=i:is SOURCE=-
+ifeq (,$(filter fremovexattr,$(unix-syscalls)))
+unix-syscalls += fremovexattr
+$(foreach o,$(object-suffixes),$(objpfx)fremovexattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fremovexattr$o) $(objpfx)rtld-fremovexattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (fremovexattr, fremovexattr, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(fremovexattr)'; \
+	 echo 'libc_hidden_def (fremovexattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter fremovexattr,$(bp-thunks)))
+bp-thunks += fremovexattr
+$(objpfx)$(bppfx)fremovexattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define fremovexattr(i1, s2) i0v; \'; \
+	 echo 'extern i1, i1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (fremovexattr) (__typeof (i1v) i1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (fremovexattr) (__typeof (i1v), __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (fremovexattr) (i1a, CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (fremovexattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mq_timedsend NUMBER=((0x900000 +276)) ARGS=i:ipiip SOURCE=-
+ifeq (,$(filter mq_timedsend,$(unix-syscalls)))
+unix-syscalls += mq_timedsend
+$(foreach o,$(object-suffixes),$(objpfx)mq_timedsend$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mq_timedsend$o) $(objpfx)rtld-mq_timedsend.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__GI_mq_timedsend, mq_timedsend, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__GI_mq_timedsend)'; \
+	 echo 'libc_hidden_def (__GI_mq_timedsend)'; \
+	 echo 'weak_alias (__GI_mq_timedsend, mq_timedsend)'; \
+	 echo 'libc_hidden_weak (mq_timedsend)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mq_timedsend,$(bp-thunks)))
+bp-thunks += mq_timedsend
+$(objpfx)$(bppfx)mq_timedsend.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define mq_timedsend(i1, p2, i3, i4, p5) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; extern i4, i4v; extern p5, p5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__GI_mq_timedsend) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a, __typeof (i4v) i4a, __typeof (p5v) *__bounded p5a) { \'; \
+	 echo '  extern __typeof (i0v) (mq_timedsend) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v), __typeof (i4v), __typeof (p5v) *__unbounded); \'; \
+	 echo '  return (mq_timedsend) (i1a, CHECK_1 (p2a), i3a, i4a, CHECK_1 (p5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__GI_mq_timedsend)) \'; \
+	 echo 'weak_alias (BP_SYM (__GI_mq_timedsend), BP_SYM (mq_timedsend)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mq_timedsend)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mq_timedreceive NUMBER=((0x900000 +277)) ARGS=i:ipipp SOURCE=-
+ifeq (,$(filter mq_timedreceive,$(unix-syscalls)))
+unix-syscalls += mq_timedreceive
+$(foreach o,$(object-suffixes),$(objpfx)mq_timedreceive$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mq_timedreceive$o) $(objpfx)rtld-mq_timedreceive.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__GI_mq_timedreceive, mq_timedreceive, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__GI_mq_timedreceive)'; \
+	 echo 'libc_hidden_def (__GI_mq_timedreceive)'; \
+	 echo 'weak_alias (__GI_mq_timedreceive, mq_timedreceive)'; \
+	 echo 'libc_hidden_weak (mq_timedreceive)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mq_timedreceive,$(bp-thunks)))
+bp-thunks += mq_timedreceive
+$(objpfx)$(bppfx)mq_timedreceive.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define mq_timedreceive(i1, p2, i3, p4, p5) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; extern p4, p4v; extern p5, p5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__GI_mq_timedreceive) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a, __typeof (p4v) *__bounded p4a, __typeof (p5v) *__bounded p5a) { \'; \
+	 echo '  extern __typeof (i0v) (mq_timedreceive) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v), __typeof (p4v) *__unbounded, __typeof (p5v) *__unbounded); \'; \
+	 echo '  return (mq_timedreceive) (i1a, CHECK_1 (p2a), i3a, CHECK_1 (p4a), CHECK_1 (p5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__GI_mq_timedreceive)) \'; \
+	 echo 'weak_alias (BP_SYM (__GI_mq_timedreceive), BP_SYM (mq_timedreceive)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mq_timedreceive)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mq_setattr NUMBER=((0x900000 +279)) ARGS=i:ipp SOURCE=-
+ifeq (,$(filter mq_setattr,$(unix-syscalls)))
+unix-syscalls += mq_setattr
+$(foreach o,$(object-suffixes),$(objpfx)mq_setattr$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mq_setattr$o) $(objpfx)rtld-mq_setattr.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__GI_mq_setattr, mq_getsetattr, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__GI_mq_setattr)'; \
+	 echo 'libc_hidden_def (__GI_mq_setattr)'; \
+	 echo 'weak_alias (__GI_mq_setattr, mq_setattr)'; \
+	 echo 'libc_hidden_weak (mq_setattr)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mq_setattr,$(bp-thunks)))
+bp-thunks += mq_setattr
+$(objpfx)$(bppfx)mq_setattr.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define mq_setattr(i1, p2, p3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern p3, p3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__GI_mq_setattr) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (p3v) *__bounded p3a) { \'; \
+	 echo '  extern __typeof (i0v) (mq_setattr) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (p3v) *__unbounded); \'; \
+	 echo '  return (mq_setattr) (i1a, CHECK_1 (p2a), CHECK_1 (p3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__GI_mq_setattr)) \'; \
+	 echo 'weak_alias (BP_SYM (__GI_mq_setattr), BP_SYM (mq_setattr)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mq_setattr)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### DIRECTORY = sysdeps/unix/common
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux sysdeps/gnu
+
+#### CALL=adjtime NUMBER=- ARGS=i:pp SOURCE=sysdeps/unix/sysv/linux/adjtime.c
+
+#### CALL=fchmod NUMBER=((0x900000 + 94)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter fchmod,$(unix-syscalls)))
+unix-syscalls += fchmod
+$(foreach o,$(object-suffixes),$(objpfx)fchmod$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fchmod$o) $(objpfx)rtld-fchmod.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__fchmod, fchmod, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__fchmod)'; \
+	 echo 'libc_hidden_def (__fchmod)'; \
+	 echo 'weak_alias (__fchmod, fchmod)'; \
+	 echo 'libc_hidden_weak (fchmod)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=fchown NUMBER=((0x900000 + 95)) ARGS=i:iii SOURCE=sysdeps/unix/sysv/linux/arm/fchown.c
+
+#### CALL=ftruncate NUMBER=((0x900000 + 93)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter ftruncate,$(unix-syscalls)))
+unix-syscalls += ftruncate
+$(foreach o,$(object-suffixes),$(objpfx)ftruncate$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-ftruncate$o) $(objpfx)rtld-ftruncate.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__ftruncate, ftruncate, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__ftruncate)'; \
+	 echo 'libc_hidden_def (__ftruncate)'; \
+	 echo 'weak_alias (__ftruncate, ftruncate)'; \
+	 echo 'libc_hidden_weak (ftruncate)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getrusage NUMBER=((0x900000 + 77)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter getrusage,$(unix-syscalls)))
+unix-syscalls += getrusage
+$(foreach o,$(object-suffixes),$(objpfx)getrusage$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getrusage$o) $(objpfx)rtld-getrusage.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__getrusage, getrusage, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__getrusage)'; \
+	 echo 'libc_hidden_def (__getrusage)'; \
+	 echo 'weak_alias (__getrusage, getrusage)'; \
+	 echo 'libc_hidden_weak (getrusage)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter getrusage,$(bp-thunks)))
+bp-thunks += getrusage
+$(objpfx)$(bppfx)getrusage.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __getrusage(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__getrusage) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__getrusage) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__getrusage) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__getrusage)) \'; \
+	 echo 'weak_alias (BP_SYM (__getrusage), BP_SYM (getrusage)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (getrusage)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=gettimeofday NUMBER=((0x900000 + 78)) ARGS=i:PP SOURCE=-
+ifeq (,$(filter gettimeofday,$(unix-syscalls)))
+unix-syscalls += gettimeofday
+$(foreach o,$(object-suffixes),$(objpfx)gettimeofday$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-gettimeofday$o) $(objpfx)rtld-gettimeofday.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__gettimeofday, gettimeofday, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__gettimeofday)'; \
+	 echo 'libc_hidden_def (__gettimeofday)'; \
+	 echo 'weak_alias (__gettimeofday, gettimeofday)'; \
+	 echo 'libc_hidden_weak (gettimeofday)'; \
+	 echo 'weak_alias (__gettimeofday, __gettimeofday_internal)'; \
+	 echo 'libc_hidden_weak (__gettimeofday_internal)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter gettimeofday,$(bp-thunks)))
+bp-thunks += gettimeofday
+$(objpfx)$(bppfx)gettimeofday.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __gettimeofday_internal(P1, P2) i0v; \'; \
+	 echo 'extern P1, P1v; extern P2, P2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__gettimeofday) (__typeof (P1v) *__bounded P1a, __typeof (P2v) *__bounded P2a) { \'; \
+	 echo '  extern __typeof (i0v) (__gettimeofday_internal) (__typeof (P1v) *__unbounded, __typeof (P2v) *__unbounded); \'; \
+	 echo '  return (__gettimeofday_internal) (CHECK_1_NULL_OK (P1a), CHECK_1_NULL_OK (P2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__gettimeofday)) \'; \
+	 echo 'weak_alias (BP_SYM (__gettimeofday), BP_SYM (gettimeofday)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (gettimeofday)) \'; \
+	 echo 'weak_alias (BP_SYM (__gettimeofday), BP_SYM (__gettimeofday_internal)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__gettimeofday_internal)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=settimeofday NUMBER=((0x900000 + 79)) ARGS=i:PP SOURCE=-
+ifeq (,$(filter settimeofday,$(unix-syscalls)))
+unix-syscalls += settimeofday
+$(foreach o,$(object-suffixes),$(objpfx)settimeofday$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-settimeofday$o) $(objpfx)rtld-settimeofday.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__settimeofday, settimeofday, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__settimeofday)'; \
+	 echo 'libc_hidden_def (__settimeofday)'; \
+	 echo 'weak_alias (__settimeofday, settimeofday)'; \
+	 echo 'libc_hidden_weak (settimeofday)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter settimeofday,$(bp-thunks)))
+bp-thunks += settimeofday
+$(objpfx)$(bppfx)settimeofday.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __settimeofday(P1, P2) i0v; \'; \
+	 echo 'extern P1, P1v; extern P2, P2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__settimeofday) (__typeof (P1v) *__bounded P1a, __typeof (P2v) *__bounded P2a) { \'; \
+	 echo '  extern __typeof (i0v) (__settimeofday) (__typeof (P1v) *__unbounded, __typeof (P2v) *__unbounded); \'; \
+	 echo '  return (__settimeofday) (CHECK_1_NULL_OK (P1a), CHECK_1_NULL_OK (P2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__settimeofday)) \'; \
+	 echo 'weak_alias (BP_SYM (__settimeofday), BP_SYM (settimeofday)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (settimeofday)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setpgid NUMBER=- ARGS=i:ii SOURCE=-
+
+#### CALL=setregid NUMBER=((0x900000 + 71)) ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/arm/setregid.c
+
+#### CALL=setreuid NUMBER=((0x900000 + 70)) ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/arm/setreuid.c
+
+#### CALL=sigaction NUMBER=((0x900000 + 67)) ARGS=i:ipp SOURCE=sysdeps/unix/sysv/linux/arm/sigaction.c
+
+#### CALL=sys_lstat NUMBER=((0x900000 +107)) ARGS=i:sp SOURCE=sysdeps/unix/sysv/linux/arm/lxstat.c
+
+#### CALL=truncate NUMBER=((0x900000 + 92)) ARGS=i:si SOURCE=-
+ifeq (,$(filter truncate,$(unix-syscalls)))
+unix-syscalls += truncate
+$(foreach o,$(object-suffixes),$(objpfx)truncate$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-truncate$o) $(objpfx)rtld-truncate.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__truncate, truncate, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__truncate)'; \
+	 echo 'libc_hidden_def (__truncate)'; \
+	 echo 'weak_alias (__truncate, truncate)'; \
+	 echo 'libc_hidden_weak (truncate)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter truncate,$(bp-thunks)))
+bp-thunks += truncate
+$(objpfx)$(bppfx)truncate.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __truncate(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__truncate) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__truncate) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__truncate) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__truncate)) \'; \
+	 echo 'weak_alias (BP_SYM (__truncate), BP_SYM (truncate)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (truncate)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=vhangup NUMBER=((0x900000 +111)) ARGS=i:i SOURCE=-
+ifeq (,$(filter vhangup,$(unix-syscalls)))
+unix-syscalls += vhangup
+$(foreach o,$(object-suffixes),$(objpfx)vhangup$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-vhangup$o) $(objpfx)rtld-vhangup.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (vhangup, vhangup, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(vhangup)'; \
+	 echo 'libc_hidden_def (vhangup)'; \
+	) | $(compile-syscall)
+endif
+
+#### DIRECTORY = sysdeps/unix/mman
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common
+
+#### CALL=madvise NUMBER=((0x900000 +220)) ARGS=i:pii SOURCE=-
+ifeq (,$(filter madvise,$(unix-syscalls)))
+unix-syscalls += madvise
+$(foreach o,$(object-suffixes),$(objpfx)madvise$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-madvise$o) $(objpfx)rtld-madvise.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (madvise, madvise, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(madvise)'; \
+	 echo 'libc_hidden_def (madvise)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter madvise,$(bp-thunks)))
+bp-thunks += madvise
+$(objpfx)$(bppfx)madvise.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define madvise(p1, i2, i3) i0v; \'; \
+	 echo 'extern p1, p1v; extern i2, i2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (madvise) (__typeof (p1v) *__bounded p1a, __typeof (i2v) i2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (madvise) (__typeof (p1v) *__unbounded, __typeof (i2v), __typeof (i3v)); \'; \
+	 echo '  return (madvise) (CHECK_1 (p1a), i2a, i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (madvise)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mmap NUMBER=((0x900000 + 90)) ARGS=b:aniiii SOURCE=sysdeps/unix/sysv/linux/arm/mmap.S
+ifeq (,$(filter mmap,$(bp-thunks)))
+bp-thunks += mmap
+$(objpfx)$(bppfx)mmap.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mmap(a1, n2, i3, i4, i5, i6) x0; extern char b0v; \'; \
+	 echo 'extern char a1v; extern n2, n2v; extern i3, i3v; extern i4, i4v; extern i5, i5v; extern i6, i6v; \'; \
+	 echo '__typeof (b0v) *__bounded BP_SYM (__mmap) (__typeof (a1v) *__bounded a1a, __typeof (n2v) n2a, __typeof (i3v) i3a, __typeof (i4v) i4a, __typeof (i5v) i5a, __typeof (i6v) i6a) { \'; \
+	 echo '  extern __typeof (b0v) *__unbounded (__mmap) (__typeof (a1v) *__unbounded, __typeof (n2v), __typeof (i3v), __typeof (i4v), __typeof (i5v), __typeof (i6v)); \'; \
+	 echo '  return BOUNDED_N ((__mmap) (__ptrvalue (a1a), n2a, i3a, i4a, i5a, i6a), n2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mmap)) \'; \
+	 echo 'weak_alias (BP_SYM (__mmap), BP_SYM (mmap)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mmap)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=mprotect NUMBER=((0x900000 +125)) ARGS=i:aii SOURCE=-
+ifeq (,$(filter mprotect,$(unix-syscalls)))
+unix-syscalls += mprotect
+$(foreach o,$(object-suffixes),$(objpfx)mprotect$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mprotect$o) $(objpfx)rtld-mprotect.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__mprotect, mprotect, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__mprotect)'; \
+	 echo 'libc_hidden_def (__mprotect)'; \
+	 echo 'weak_alias (__mprotect, mprotect)'; \
+	 echo 'libc_hidden_weak (mprotect)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mprotect,$(bp-thunks)))
+bp-thunks += mprotect
+$(objpfx)$(bppfx)mprotect.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mprotect(a1, i2, i3) i0v; \'; \
+	 echo 'extern char a1v; extern i2, i2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__mprotect) (__typeof (a1v) *__bounded a1a, __typeof (i2v) i2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__mprotect) (__typeof (a1v) *__unbounded, __typeof (i2v), __typeof (i3v)); \'; \
+	 echo '  return (__mprotect) (__ptrvalue (a1a), i2a, i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mprotect)) \'; \
+	 echo 'weak_alias (BP_SYM (__mprotect), BP_SYM (mprotect)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mprotect)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=msync NUMBER=((0x900000 +144)) ARGS=i:aii SOURCE=-
+ifeq (,$(filter msync,$(unix-syscalls)))
+unix-syscalls += msync
+$(foreach o,$(object-suffixes),$(objpfx)msync$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-msync$o) $(objpfx)rtld-msync.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_msync, msync, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_msync)'; \
+	 echo 'libc_hidden_def (__libc_msync)'; \
+	 echo 'weak_alias (__libc_msync, msync)'; \
+	 echo 'libc_hidden_weak (msync)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter msync,$(bp-thunks)))
+bp-thunks += msync
+$(objpfx)$(bppfx)msync.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define msync(a1, i2, i3) i0v; \'; \
+	 echo 'extern char a1v; extern i2, i2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_msync) (__typeof (a1v) *__bounded a1a, __typeof (i2v) i2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (msync) (__typeof (a1v) *__unbounded, __typeof (i2v), __typeof (i3v)); \'; \
+	 echo '  return (msync) (__ptrvalue (a1a), i2a, i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_msync)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_msync), BP_SYM (msync)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (msync)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=munmap NUMBER=((0x900000 + 91)) ARGS=i:ai SOURCE=-
+ifeq (,$(filter munmap,$(unix-syscalls)))
+unix-syscalls += munmap
+$(foreach o,$(object-suffixes),$(objpfx)munmap$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-munmap$o) $(objpfx)rtld-munmap.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__munmap, munmap, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__munmap)'; \
+	 echo 'libc_hidden_def (__munmap)'; \
+	 echo 'weak_alias (__munmap, munmap)'; \
+	 echo 'libc_hidden_weak (munmap)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter munmap,$(bp-thunks)))
+bp-thunks += munmap
+$(objpfx)$(bppfx)munmap.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __munmap(a1, i2) i0v; \'; \
+	 echo 'extern char a1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__munmap) (__typeof (a1v) *__bounded a1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__munmap) (__typeof (a1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__munmap) (__ptrvalue (a1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__munmap)) \'; \
+	 echo 'weak_alias (BP_SYM (__munmap), BP_SYM (munmap)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (munmap)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### DIRECTORY = sysdeps/unix/inet
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common sysdeps/unix/mman
+
+#### CALL=accept NUMBER=- ARGS=i:iBN SOURCE=sysdeps/unix/sysv/linux/accept.S
+ifeq (,$(filter accept,$(bp-thunks)))
+bp-thunks += accept
+$(objpfx)$(bppfx)accept.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __libc_accept(i1, B2, N3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char B2v; extern N3, N3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_accept) (__typeof (i1v) i1a, __typeof (B2v) *__bounded B2a, __typeof (N3v) *__bounded N3a) { \'; \
+	 echo '  extern __typeof (i0v) (__libc_accept) (__typeof (i1v), __typeof (B2v) *__unbounded, __typeof (N3v) *__unbounded); \'; \
+	 echo '  return (__libc_accept) (i1a, CHECK_N_NULL_OK (B2a, *CHECK_1 (N3a)), __ptrvalue (N3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_accept)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_accept), BP_SYM (accept)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (accept)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=bind NUMBER=- ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/bind.S
+ifeq (,$(filter bind,$(bp-thunks)))
+bp-thunks += bind
+$(objpfx)$(bppfx)bind.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __bind(i1, p2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__bind) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__bind) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (__bind) (i1a, CHECK_1 (p2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__bind)) \'; \
+	 echo 'weak_alias (BP_SYM (__bind), BP_SYM (bind)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (bind)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=connect NUMBER=- ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/connect.S
+ifeq (,$(filter connect,$(bp-thunks)))
+bp-thunks += connect
+$(objpfx)$(bppfx)connect.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __libc_connect(i1, p2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_connect) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__libc_connect) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (__libc_connect) (i1a, CHECK_1 (p2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_connect)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_connect), BP_SYM (__connect)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__connect)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_connect), BP_SYM (__connect_internal)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__connect_internal)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_connect), BP_SYM (connect)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (connect)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=gethostid NUMBER=- ARGS=i: SOURCE=sysdeps/unix/sysv/linux/gethostid.c
+
+#### CALL=gethostname NUMBER=- ARGS=i:bn SOURCE=-
+
+#### CALL=getpeername NUMBER=- ARGS=i:ibN SOURCE=sysdeps/unix/sysv/linux/getpeername.S
+ifeq (,$(filter getpeername,$(bp-thunks)))
+bp-thunks += getpeername
+$(objpfx)$(bppfx)getpeername.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __getpeername(i1, b2, N3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern N3, N3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__getpeername) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (N3v) *__bounded N3a) { \'; \
+	 echo '  extern __typeof (i0v) (__getpeername) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (N3v) *__unbounded); \'; \
+	 echo '  return (__getpeername) (i1a, CHECK_N (b2a, *CHECK_1 (N3a)), __ptrvalue (N3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__getpeername)) \'; \
+	 echo 'weak_alias (BP_SYM (__getpeername), BP_SYM (getpeername)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (getpeername)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=getsockname NUMBER=- ARGS=i:ibN SOURCE=sysdeps/unix/sysv/linux/getsockname.S
+ifeq (,$(filter getsockname,$(bp-thunks)))
+bp-thunks += getsockname
+$(objpfx)$(bppfx)getsockname.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __getsockname(i1, b2, N3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern N3, N3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__getsockname) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (N3v) *__bounded N3a) { \'; \
+	 echo '  extern __typeof (i0v) (__getsockname) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (N3v) *__unbounded); \'; \
+	 echo '  return (__getsockname) (i1a, CHECK_N (b2a, *CHECK_1 (N3a)), __ptrvalue (N3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__getsockname)) \'; \
+	 echo 'weak_alias (BP_SYM (__getsockname), BP_SYM (getsockname)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (getsockname)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=getsockopt NUMBER=- ARGS=i:iiiBN SOURCE=sysdeps/unix/sysv/linux/getsockopt.S
+ifeq (,$(filter getsockopt,$(bp-thunks)))
+bp-thunks += getsockopt
+$(objpfx)$(bppfx)getsockopt.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define getsockopt(i1, i2, i3, B4, N5) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern i3, i3v; extern char B4v; extern N5, N5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (getsockopt) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (i3v) i3a, __typeof (B4v) *__bounded B4a, __typeof (N5v) *__bounded N5a) { \'; \
+	 echo '  extern __typeof (i0v) (getsockopt) (__typeof (i1v), __typeof (i2v), __typeof (i3v), __typeof (B4v) *__unbounded, __typeof (N5v) *__unbounded); \'; \
+	 echo '  return (getsockopt) (i1a, i2a, i3a, CHECK_N_NULL_OK (B4a, *CHECK_1 (N5a)), __ptrvalue (N5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (getsockopt)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=listen NUMBER=- ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/listen.S
+
+#### CALL=recv NUMBER=- ARGS=i:ibni SOURCE=sysdeps/unix/sysv/linux/recv.S
+ifeq (,$(filter recv,$(bp-thunks)))
+bp-thunks += recv
+$(objpfx)$(bppfx)recv.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define recv(i1, b2, n3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_recv) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (recv) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v), __typeof (i4v)); \'; \
+	 echo '  return (recv) (i1a, CHECK_N (b2a, n3a), n3a, i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_recv)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_recv), BP_SYM (recv)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (recv)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=recvfrom NUMBER=- ARGS=i:ibniBN SOURCE=sysdeps/unix/sysv/linux/recvfrom.S
+ifeq (,$(filter recvfrom,$(bp-thunks)))
+bp-thunks += recvfrom
+$(objpfx)$(bppfx)recvfrom.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __recvfrom(i1, b2, n3, i4, B5, N6) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; extern i4, i4v; extern char B5v; extern N6, N6v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_recvfrom) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a, __typeof (i4v) i4a, __typeof (B5v) *__bounded B5a, __typeof (N6v) *__bounded N6a) { \'; \
+	 echo '  extern __typeof (i0v) (__recvfrom) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v), __typeof (i4v), __typeof (B5v) *__unbounded, __typeof (N6v) *__unbounded); \'; \
+	 echo '  return (__recvfrom) (i1a, CHECK_N (b2a, n3a), n3a, i4a, CHECK_N_NULL_OK (B5a, *CHECK_1 (N6a)), __ptrvalue (N6a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_recvfrom)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_recvfrom), BP_SYM (__recvfrom)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__recvfrom)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_recvfrom), BP_SYM (recvfrom)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (recvfrom)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=recvmsg NUMBER=- ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/recvmsg.S
+ifeq (,$(filter recvmsg,$(bp-thunks)))
+bp-thunks += recvmsg
+$(objpfx)$(bppfx)recvmsg.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __recvmsg(i1, p2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_recvmsg) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__recvmsg) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (__recvmsg) (i1a, CHECK_1 (p2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_recvmsg)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_recvmsg), BP_SYM (__recvmsg)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__recvmsg)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_recvmsg), BP_SYM (recvmsg)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (recvmsg)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=send NUMBER=- ARGS=i:ibni SOURCE=sysdeps/unix/sysv/linux/send.S
+ifeq (,$(filter send,$(bp-thunks)))
+bp-thunks += send
+$(objpfx)$(bppfx)send.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __send(i1, b2, n3, i4) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; extern i4, i4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_send) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a, __typeof (i4v) i4a) { \'; \
+	 echo '  extern __typeof (i0v) (__send) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v), __typeof (i4v)); \'; \
+	 echo '  return (__send) (i1a, CHECK_N (b2a, n3a), n3a, i4a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_send)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_send), BP_SYM (__send)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__send)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_send), BP_SYM (send)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (send)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sendmsg NUMBER=- ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/sendmsg.S
+ifeq (,$(filter sendmsg,$(bp-thunks)))
+bp-thunks += sendmsg
+$(objpfx)$(bppfx)sendmsg.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __sendmsg(i1, p2, i3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_sendmsg) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__sendmsg) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (__sendmsg) (i1a, CHECK_1 (p2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_sendmsg)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_sendmsg), BP_SYM (__sendmsg)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__sendmsg)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_sendmsg), BP_SYM (sendmsg)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sendmsg)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sendto NUMBER=- ARGS=i:ibnibn SOURCE=sysdeps/unix/sysv/linux/sendto.S
+ifeq (,$(filter sendto,$(bp-thunks)))
+bp-thunks += sendto
+$(objpfx)$(bppfx)sendto.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __sendto(i1, b2, n3, i4, b5, n6) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; extern i4, i4v; extern char b5v; extern n6, n6v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_sendto) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a, __typeof (i4v) i4a, __typeof (b5v) *__bounded b5a, __typeof (n6v) n6a) { \'; \
+	 echo '  extern __typeof (i0v) (__sendto) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v), __typeof (i4v), __typeof (b5v) *__unbounded, __typeof (n6v)); \'; \
+	 echo '  return (__sendto) (i1a, CHECK_N (b2a, n3a), n3a, i4a, CHECK_N (b5a, n6a), n6a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_sendto)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_sendto), BP_SYM (__sendto)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__sendto)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_sendto), BP_SYM (sendto)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (sendto)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sethostid NUMBER=- ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/sethostid.c
+
+#### CALL=sethostname NUMBER=((0x900000 + 74)) ARGS=i:pi SOURCE=-
+ifeq (,$(filter sethostname,$(unix-syscalls)))
+unix-syscalls += sethostname
+$(foreach o,$(object-suffixes),$(objpfx)sethostname$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sethostname$o) $(objpfx)rtld-sethostname.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (sethostname, sethostname, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(sethostname)'; \
+	 echo 'libc_hidden_def (sethostname)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter sethostname,$(bp-thunks)))
+bp-thunks += sethostname
+$(objpfx)$(bppfx)sethostname.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define sethostname(p1, i2) i0v; \'; \
+	 echo 'extern p1, p1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (sethostname) (__typeof (p1v) *__bounded p1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (sethostname) (__typeof (p1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (sethostname) (CHECK_1 (p1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (sethostname)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setsockopt NUMBER=- ARGS=i:iiibn SOURCE=sysdeps/unix/sysv/linux/setsockopt.S
+ifeq (,$(filter setsockopt,$(bp-thunks)))
+bp-thunks += setsockopt
+$(objpfx)$(bppfx)setsockopt.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __setsockopt(i1, i2, i3, b4, n5) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern i3, i3v; extern char b4v; extern n5, n5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (setsockopt) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (i3v) i3a, __typeof (b4v) *__bounded b4a, __typeof (n5v) n5a) { \'; \
+	 echo '  extern __typeof (i0v) (__setsockopt) (__typeof (i1v), __typeof (i2v), __typeof (i3v), __typeof (b4v) *__unbounded, __typeof (n5v)); \'; \
+	 echo '  return (__setsockopt) (i1a, i2a, i3a, CHECK_N (b4a, n5a), n5a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (setsockopt)) \'; \
+	 echo 'weak_alias (BP_SYM (setsockopt), BP_SYM (__setsockopt)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__setsockopt)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=shutdown NUMBER=- ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/shutdown.S
+
+#### CALL=socket NUMBER=- ARGS=i:iii SOURCE=sysdeps/unix/sysv/linux/arm/socket.S
+
+#### CALL=socketpair NUMBER=- ARGS=i:iiif SOURCE=sysdeps/unix/sysv/linux/socketpair.S
+ifeq (,$(filter socketpair,$(bp-thunks)))
+bp-thunks += socketpair
+$(objpfx)$(bppfx)socketpair.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define socketpair(i1, i2, i3, f4) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern i3, i3v; extern f4, f4v; \'; \
+	 echo '__typeof (i0v) BP_SYM (socketpair) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (i3v) i3a, __typeof (f4v) *__bounded f4a) { \'; \
+	 echo '  extern __typeof (i0v) (socketpair) (__typeof (i1v), __typeof (i2v), __typeof (i3v), __typeof (f4v) *__unbounded); \'; \
+	 echo '  return (socketpair) (i1a, i2a, i3a, CHECK_N (f4a, 2)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (socketpair)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### DIRECTORY = sysdeps/unix/sysv
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common sysdeps/unix/mman sysdeps/unix/inet
+
+#### CALL=alarm NUMBER=((0x900000 + 27)) ARGS=i:i SOURCE=-
+ifeq (,$(filter alarm,$(unix-syscalls)))
+unix-syscalls += alarm
+$(foreach o,$(object-suffixes),$(objpfx)alarm$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-alarm$o) $(objpfx)rtld-alarm.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (alarm, alarm, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(alarm)'; \
+	 echo 'libc_hidden_def (alarm)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=ftime NUMBER=- ARGS=i:p SOURCE=sysdeps/unix/sysv/linux/ftime.c
+
+#### CALL=nice NUMBER=((0x900000 + 34)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/nice.c
+
+#### CALL=pause NUMBER=((0x900000 + 29)) ARGS=i: SOURCE=-
+ifeq (,$(filter pause,$(unix-syscalls)))
+unix-syscalls += pause
+$(foreach o,$(object-suffixes),$(objpfx)pause$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-pause$o) $(objpfx)rtld-pause.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (pause, pause, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(pause)'; \
+	 echo 'libc_hidden_def (pause)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=poll NUMBER=((0x900000 +168)) ARGS=i:pii SOURCE=sysdeps/unix/sysv/linux/poll.c
+
+#### CALL=s_getdents NUMBER=((0x900000 +141)) ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/getdents.c
+
+#### CALL=setrlimit NUMBER=((0x900000 + 75)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/setrlimit.c
+
+#### CALL=settimeofday NUMBER=((0x900000 + 79)) ARGS=i:PP SOURCE=-
+ifeq (,$(filter settimeofday,$(unix-syscalls)))
+unix-syscalls += settimeofday
+$(foreach o,$(object-suffixes),$(objpfx)settimeofday$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-settimeofday$o) $(objpfx)rtld-settimeofday.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__settimeofday, settimeofday, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__settimeofday)'; \
+	 echo 'libc_hidden_def (__settimeofday)'; \
+	 echo 'weak_alias (__settimeofday, settimeofday)'; \
+	 echo 'libc_hidden_weak (settimeofday)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter settimeofday,$(bp-thunks)))
+bp-thunks += settimeofday
+$(objpfx)$(bppfx)settimeofday.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __settimeofday(P1, P2) i0v; \'; \
+	 echo 'extern P1, P1v; extern P2, P2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__settimeofday) (__typeof (P1v) *__bounded P1a, __typeof (P2v) *__bounded P2a) { \'; \
+	 echo '  extern __typeof (i0v) (__settimeofday) (__typeof (P1v) *__unbounded, __typeof (P2v) *__unbounded); \'; \
+	 echo '  return (__settimeofday) (CHECK_1_NULL_OK (P1a), CHECK_1_NULL_OK (P2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__settimeofday)) \'; \
+	 echo 'weak_alias (BP_SYM (__settimeofday), BP_SYM (settimeofday)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (settimeofday)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=signal NUMBER=- ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/signal.c
+
+#### CALL=stime NUMBER=((0x900000 + 25)) ARGS=i:p SOURCE=-
+ifeq (,$(filter stime,$(unix-syscalls)))
+unix-syscalls += stime
+$(foreach o,$(object-suffixes),$(objpfx)stime$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-stime$o) $(objpfx)rtld-stime.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (stime, stime, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(stime)'; \
+	 echo 'libc_hidden_def (stime)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter stime,$(bp-thunks)))
+bp-thunks += stime
+$(objpfx)$(bppfx)stime.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define stime(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (stime) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (stime) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (stime) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (stime)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=time NUMBER=((0x900000 + 13)) ARGS=i:P SOURCE=-
+ifeq (,$(filter time,$(unix-syscalls)))
+unix-syscalls += time
+$(foreach o,$(object-suffixes),$(objpfx)time$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-time$o) $(objpfx)rtld-time.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_NOERRNO (time, time, 1)'; \
+	 echo '	ret_NOERRNO'; \
+	 echo 'PSEUDO_END_NOERRNO(time)'; \
+	 echo 'libc_hidden_def (time)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter time,$(bp-thunks)))
+bp-thunks += time
+$(objpfx)$(bppfx)time.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define time(P1) i0v; \'; \
+	 echo 'extern P1, P1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (time) (__typeof (P1v) *__bounded P1a) { \'; \
+	 echo '  extern __typeof (i0v) (time) (__typeof (P1v) *__unbounded); \'; \
+	 echo '  return (time) (CHECK_1_NULL_OK (P1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (time)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=times NUMBER=((0x900000 + 43)) ARGS=i:p SOURCE=-
+ifeq (,$(filter times,$(unix-syscalls)))
+unix-syscalls += times
+$(foreach o,$(object-suffixes),$(objpfx)times$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-times$o) $(objpfx)rtld-times.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__times, times, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__times)'; \
+	 echo 'libc_hidden_def (__times)'; \
+	 echo 'weak_alias (__times, times)'; \
+	 echo 'libc_hidden_weak (times)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter times,$(bp-thunks)))
+bp-thunks += times
+$(objpfx)$(bppfx)times.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __times(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__times) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (__times) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (__times) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__times)) \'; \
+	 echo 'weak_alias (BP_SYM (__times), BP_SYM (times)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (times)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=ulimit NUMBER=- ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/ulimit.c
+
+#### CALL=utime NUMBER=((0x900000 + 30)) ARGS=i:sP SOURCE=-
+ifeq (,$(filter utime,$(unix-syscalls)))
+unix-syscalls += utime
+$(foreach o,$(object-suffixes),$(objpfx)utime$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-utime$o) $(objpfx)rtld-utime.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (utime, utime, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(utime)'; \
+	 echo 'libc_hidden_def (utime)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter utime,$(bp-thunks)))
+bp-thunks += utime
+$(objpfx)$(bppfx)utime.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define utime(s1, P2) i0v; \'; \
+	 echo 'extern char s1v; extern P2, P2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (utime) (__typeof (s1v) *__bounded s1a, __typeof (P2v) *__bounded P2a) { \'; \
+	 echo '  extern __typeof (i0v) (utime) (__typeof (s1v) *__unbounded, __typeof (P2v) *__unbounded); \'; \
+	 echo '  return (utime) (CHECK_STRING (s1a), CHECK_1_NULL_OK (P2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (utime)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### DIRECTORY = sysdeps/unix
+#### SYSDIRS = sysdeps/arm/elf sysdeps/unix/sysv/linux/arm sysdeps/unix/sysv/linux sysdeps/gnu sysdeps/unix/common sysdeps/unix/mman sysdeps/unix/inet sysdeps/unix/sysv sysdeps/unix/arm
+
+#### CALL=access NUMBER=((0x900000 + 33)) ARGS=i:si SOURCE=-
+ifeq (,$(filter access,$(unix-syscalls)))
+unix-syscalls += access
+$(foreach o,$(object-suffixes),$(objpfx)access$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-access$o) $(objpfx)rtld-access.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__access, access, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__access)'; \
+	 echo 'libc_hidden_def (__access)'; \
+	 echo 'weak_alias (__access, access)'; \
+	 echo 'libc_hidden_weak (access)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter access,$(bp-thunks)))
+bp-thunks += access
+$(objpfx)$(bppfx)access.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __access(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__access) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__access) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__access) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__access)) \'; \
+	 echo 'weak_alias (BP_SYM (__access), BP_SYM (access)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (access)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=acct NUMBER=((0x900000 + 51)) ARGS=i:S SOURCE=-
+ifeq (,$(filter acct,$(unix-syscalls)))
+unix-syscalls += acct
+$(foreach o,$(object-suffixes),$(objpfx)acct$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-acct$o) $(objpfx)rtld-acct.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (acct, acct, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(acct)'; \
+	 echo 'libc_hidden_def (acct)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter acct,$(bp-thunks)))
+bp-thunks += acct
+$(objpfx)$(bppfx)acct.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define acct(S1) i0v; \'; \
+	 echo 'extern char S1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (acct) (__typeof (S1v) *__bounded S1a) { \'; \
+	 echo '  extern __typeof (i0v) (acct) (__typeof (S1v) *__unbounded); \'; \
+	 echo '  return (acct) (CHECK_STRING_NULL_OK (S1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (acct)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=chdir NUMBER=((0x900000 + 12)) ARGS=i:s SOURCE=-
+ifeq (,$(filter chdir,$(unix-syscalls)))
+unix-syscalls += chdir
+$(foreach o,$(object-suffixes),$(objpfx)chdir$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-chdir$o) $(objpfx)rtld-chdir.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__chdir, chdir, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__chdir)'; \
+	 echo 'libc_hidden_def (__chdir)'; \
+	 echo 'weak_alias (__chdir, chdir)'; \
+	 echo 'libc_hidden_weak (chdir)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter chdir,$(bp-thunks)))
+bp-thunks += chdir
+$(objpfx)$(bppfx)chdir.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __chdir(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__chdir) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (__chdir) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (__chdir) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__chdir)) \'; \
+	 echo 'weak_alias (BP_SYM (__chdir), BP_SYM (chdir)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (chdir)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=chmod NUMBER=((0x900000 + 15)) ARGS=i:si SOURCE=-
+ifeq (,$(filter chmod,$(unix-syscalls)))
+unix-syscalls += chmod
+$(foreach o,$(object-suffixes),$(objpfx)chmod$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-chmod$o) $(objpfx)rtld-chmod.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__chmod, chmod, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__chmod)'; \
+	 echo 'libc_hidden_def (__chmod)'; \
+	 echo 'weak_alias (__chmod, chmod)'; \
+	 echo 'libc_hidden_weak (chmod)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter chmod,$(bp-thunks)))
+bp-thunks += chmod
+$(objpfx)$(bppfx)chmod.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __chmod(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__chmod) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__chmod) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__chmod) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__chmod)) \'; \
+	 echo 'weak_alias (BP_SYM (__chmod), BP_SYM (chmod)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (chmod)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=chown NUMBER=((0x900000 +182)) ARGS=i:sii SOURCE=sysdeps/unix/sysv/linux/arm/chown.c
+
+#### CALL=chroot NUMBER=((0x900000 + 61)) ARGS=i:s SOURCE=-
+ifeq (,$(filter chroot,$(unix-syscalls)))
+unix-syscalls += chroot
+$(foreach o,$(object-suffixes),$(objpfx)chroot$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-chroot$o) $(objpfx)rtld-chroot.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (chroot, chroot, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(chroot)'; \
+	 echo 'libc_hidden_def (chroot)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter chroot,$(bp-thunks)))
+bp-thunks += chroot
+$(objpfx)$(bppfx)chroot.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define chroot(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (chroot) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (chroot) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (chroot) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (chroot)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=close NUMBER=((0x900000 + 6)) ARGS=i:i SOURCE=-
+ifeq (,$(filter close,$(unix-syscalls)))
+unix-syscalls += close
+$(foreach o,$(object-suffixes),$(objpfx)close$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-close$o) $(objpfx)rtld-close.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_close, close, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_close)'; \
+	 echo 'libc_hidden_def (__libc_close)'; \
+	 echo 'weak_alias (__libc_close, __close)'; \
+	 echo 'libc_hidden_weak (__close)'; \
+	 echo 'weak_alias (__libc_close, close)'; \
+	 echo 'libc_hidden_weak (close)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=dup NUMBER=((0x900000 + 41)) ARGS=i:i SOURCE=-
+ifeq (,$(filter dup,$(unix-syscalls)))
+unix-syscalls += dup
+$(foreach o,$(object-suffixes),$(objpfx)dup$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-dup$o) $(objpfx)rtld-dup.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__dup, dup, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__dup)'; \
+	 echo 'libc_hidden_def (__dup)'; \
+	 echo 'weak_alias (__dup, dup)'; \
+	 echo 'libc_hidden_weak (dup)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=dup2 NUMBER=((0x900000 + 63)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter dup2,$(unix-syscalls)))
+unix-syscalls += dup2
+$(foreach o,$(object-suffixes),$(objpfx)dup2$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-dup2$o) $(objpfx)rtld-dup2.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__dup2, dup2, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__dup2)'; \
+	 echo 'libc_hidden_def (__dup2)'; \
+	 echo 'weak_alias (__dup2, dup2)'; \
+	 echo 'libc_hidden_weak (dup2)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=fchdir NUMBER=((0x900000 +133)) ARGS=i:i SOURCE=-
+ifeq (,$(filter fchdir,$(unix-syscalls)))
+unix-syscalls += fchdir
+$(foreach o,$(object-suffixes),$(objpfx)fchdir$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fchdir$o) $(objpfx)rtld-fchdir.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__fchdir, fchdir, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__fchdir)'; \
+	 echo 'libc_hidden_def (__fchdir)'; \
+	 echo 'weak_alias (__fchdir, fchdir)'; \
+	 echo 'libc_hidden_weak (fchdir)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=fcntl NUMBER=((0x900000 + 55)) ARGS=i:iiF SOURCE=sysdeps/unix/sysv/linux/arm/fcntl.c
+
+#### CALL=fstatfs NUMBER=((0x900000 +100)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter fstatfs,$(unix-syscalls)))
+unix-syscalls += fstatfs
+$(foreach o,$(object-suffixes),$(objpfx)fstatfs$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fstatfs$o) $(objpfx)rtld-fstatfs.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__fstatfs, fstatfs, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__fstatfs)'; \
+	 echo 'libc_hidden_def (__fstatfs)'; \
+	 echo 'weak_alias (__fstatfs, fstatfs)'; \
+	 echo 'libc_hidden_weak (fstatfs)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter fstatfs,$(bp-thunks)))
+bp-thunks += fstatfs
+$(objpfx)$(bppfx)fstatfs.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __fstatfs(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__fstatfs) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__fstatfs) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__fstatfs) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__fstatfs)) \'; \
+	 echo 'weak_alias (BP_SYM (__fstatfs), BP_SYM (fstatfs)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (fstatfs)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=fsync NUMBER=((0x900000 +118)) ARGS=i:i SOURCE=-
+ifeq (,$(filter fsync,$(unix-syscalls)))
+unix-syscalls += fsync
+$(foreach o,$(object-suffixes),$(objpfx)fsync$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-fsync$o) $(objpfx)rtld-fsync.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_fsync, fsync, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_fsync)'; \
+	 echo 'libc_hidden_def (__libc_fsync)'; \
+	 echo 'weak_alias (__libc_fsync, fsync)'; \
+	 echo 'libc_hidden_weak (fsync)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getdomain NUMBER=- ARGS=i:si SOURCE=-
+
+#### CALL=getgid NUMBER=((0x900000 + 47)) ARGS=i: SOURCE=sysdeps/unix/sysv/linux/arm/getgid.c
+
+#### CALL=getgroups NUMBER=((0x900000 + 80)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/getgroups.c
+
+#### CALL=getitimer NUMBER=((0x900000 +105)) ARGS=i:ip SOURCE=-
+ifeq (,$(filter getitimer,$(unix-syscalls)))
+unix-syscalls += getitimer
+$(foreach o,$(object-suffixes),$(objpfx)getitimer$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getitimer$o) $(objpfx)rtld-getitimer.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__getitimer, getitimer, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__getitimer)'; \
+	 echo 'libc_hidden_def (__getitimer)'; \
+	 echo 'weak_alias (__getitimer, getitimer)'; \
+	 echo 'libc_hidden_weak (getitimer)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter getitimer,$(bp-thunks)))
+bp-thunks += getitimer
+$(objpfx)$(bppfx)getitimer.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __getitimer(i1, p2) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__getitimer) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__getitimer) (__typeof (i1v), __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__getitimer) (i1a, CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__getitimer)) \'; \
+	 echo 'weak_alias (BP_SYM (__getitimer), BP_SYM (getitimer)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (getitimer)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=getpid NUMBER=((0x900000 + 20)) ARGS=i: SOURCE=-
+ifeq (,$(filter getpid,$(unix-syscalls)))
+unix-syscalls += getpid
+$(foreach o,$(object-suffixes),$(objpfx)getpid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-getpid$o) $(objpfx)rtld-getpid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_NOERRNO (__getpid, getpid, 0)'; \
+	 echo '	ret_NOERRNO'; \
+	 echo 'PSEUDO_END_NOERRNO(__getpid)'; \
+	 echo 'libc_hidden_def (__getpid)'; \
+	 echo 'weak_alias (__getpid, getpid)'; \
+	 echo 'libc_hidden_weak (getpid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=getpriority NUMBER=((0x900000 + 96)) ARGS=i:ii SOURCE=sysdeps/unix/sysv/linux/getpriority.c
+
+#### CALL=getrlimit NUMBER=((0x900000 + 76)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/getrlimit.c
+
+#### CALL=getuid NUMBER=((0x900000 + 24)) ARGS=i: SOURCE=sysdeps/unix/sysv/linux/arm/getuid.c
+
+#### CALL=ioctl NUMBER=((0x900000 + 54)) ARGS=i:iiI SOURCE=-
+ifeq (,$(filter ioctl,$(unix-syscalls)))
+unix-syscalls += ioctl
+$(foreach o,$(object-suffixes),$(objpfx)ioctl$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-ioctl$o) $(objpfx)rtld-ioctl.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__ioctl, ioctl, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__ioctl)'; \
+	 echo 'libc_hidden_def (__ioctl)'; \
+	 echo 'weak_alias (__ioctl, ioctl)'; \
+	 echo 'libc_hidden_weak (ioctl)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter ioctl,$(bp-thunks)))
+bp-thunks += ioctl
+$(objpfx)$(bppfx)ioctl.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __ioctl(i1, i2, I3) i0v; \'; \
+	 echo 'extern i1, i1v; extern i2, i2v; extern char I3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__ioctl) (__typeof (i1v) i1a, __typeof (i2v) i2a, __typeof (I3v) *__bounded I3a) { \'; \
+	 echo '  extern __typeof (i0v) (__ioctl) (__typeof (i1v), __typeof (i2v), __typeof (I3v) *__unbounded); \'; \
+	 echo '  return (__ioctl) (i1a, i2a, CHECK_IOCTL (I3a, i2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__ioctl)) \'; \
+	 echo 'weak_alias (BP_SYM (__ioctl), BP_SYM (ioctl)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (ioctl)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=kill NUMBER=((0x900000 + 37)) ARGS=i:ii SOURCE=-
+ifeq (,$(filter kill,$(unix-syscalls)))
+unix-syscalls += kill
+$(foreach o,$(object-suffixes),$(objpfx)kill$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-kill$o) $(objpfx)rtld-kill.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__kill, kill, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__kill)'; \
+	 echo 'libc_hidden_def (__kill)'; \
+	 echo 'weak_alias (__kill, kill)'; \
+	 echo 'libc_hidden_weak (kill)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=link NUMBER=((0x900000 + 9)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter link,$(unix-syscalls)))
+unix-syscalls += link
+$(foreach o,$(object-suffixes),$(objpfx)link$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-link$o) $(objpfx)rtld-link.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__link, link, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__link)'; \
+	 echo 'libc_hidden_def (__link)'; \
+	 echo 'weak_alias (__link, link)'; \
+	 echo 'libc_hidden_weak (link)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter link,$(bp-thunks)))
+bp-thunks += link
+$(objpfx)$(bppfx)link.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __link(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__link) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (__link) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (__link) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__link)) \'; \
+	 echo 'weak_alias (BP_SYM (__link), BP_SYM (link)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (link)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=lseek NUMBER=((0x900000 + 19)) ARGS=i:iii SOURCE=-
+ifeq (,$(filter lseek,$(unix-syscalls)))
+unix-syscalls += lseek
+$(foreach o,$(object-suffixes),$(objpfx)lseek$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-lseek$o) $(objpfx)rtld-lseek.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__libc_lseek, lseek, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_lseek)'; \
+	 echo 'libc_hidden_def (__libc_lseek)'; \
+	 echo 'weak_alias (__libc_lseek, __lseek)'; \
+	 echo 'libc_hidden_weak (__lseek)'; \
+	 echo 'weak_alias (__libc_lseek, lseek)'; \
+	 echo 'libc_hidden_weak (lseek)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=mkdir NUMBER=((0x900000 + 39)) ARGS=i:si SOURCE=-
+ifeq (,$(filter mkdir,$(unix-syscalls)))
+unix-syscalls += mkdir
+$(foreach o,$(object-suffixes),$(objpfx)mkdir$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-mkdir$o) $(objpfx)rtld-mkdir.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__mkdir, mkdir, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__mkdir)'; \
+	 echo 'libc_hidden_def (__mkdir)'; \
+	 echo 'weak_alias (__mkdir, mkdir)'; \
+	 echo 'libc_hidden_weak (mkdir)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter mkdir,$(bp-thunks)))
+bp-thunks += mkdir
+$(objpfx)$(bppfx)mkdir.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __mkdir(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__mkdir) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (__mkdir) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (__mkdir) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__mkdir)) \'; \
+	 echo 'weak_alias (BP_SYM (__mkdir), BP_SYM (mkdir)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (mkdir)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=open NUMBER=((0x900000 + 5)) ARGS=i:siv SOURCE=-
+ifeq (,$(filter open,$(unix-syscalls)))
+unix-syscalls += open
+$(foreach o,$(object-suffixes),$(objpfx)open$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-open$o) $(objpfx)rtld-open.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_open, open, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_open)'; \
+	 echo 'libc_hidden_def (__libc_open)'; \
+	 echo 'weak_alias (__libc_open, __open)'; \
+	 echo 'libc_hidden_weak (__open)'; \
+	 echo 'weak_alias (__libc_open, open)'; \
+	 echo 'libc_hidden_weak (open)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter open,$(bp-thunks)))
+bp-thunks += open
+$(objpfx)$(bppfx)open.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __open(s1, i2, v3) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; extern int v3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_open) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a, __typeof (v3v) v3a) { \'; \
+	 echo '  extern __typeof (i0v) (__open) (__typeof (s1v) *__unbounded, __typeof (i2v), __typeof (v3v)); \'; \
+	 echo '  return (__open) (CHECK_STRING (s1a), i2a, v3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_open)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_open), BP_SYM (__open)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__open)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_open), BP_SYM (open)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (open)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=profil NUMBER=- ARGS=i:piii SOURCE=sysdeps/unix/sysv/linux/profil.c
+
+#### CALL=ptrace NUMBER=((0x900000 + 26)) ARGS=i:iiii SOURCE=sysdeps/unix/sysv/linux/ptrace.c
+
+#### CALL=read NUMBER=((0x900000 + 3)) ARGS=i:ibn SOURCE=-
+ifeq (,$(filter read,$(unix-syscalls)))
+unix-syscalls += read
+$(foreach o,$(object-suffixes),$(objpfx)read$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-read$o) $(objpfx)rtld-read.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_read, read, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_read)'; \
+	 echo 'libc_hidden_def (__libc_read)'; \
+	 echo 'weak_alias (__libc_read, __read)'; \
+	 echo 'libc_hidden_weak (__read)'; \
+	 echo 'weak_alias (__libc_read, read)'; \
+	 echo 'libc_hidden_weak (read)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter read,$(bp-thunks)))
+bp-thunks += read
+$(objpfx)$(bppfx)read.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __read(i1, b2, n3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_read) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a) { \'; \
+	 echo '  extern __typeof (i0v) (__read) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v)); \'; \
+	 echo '  return (__read) (i1a, CHECK_N (b2a, n3a), n3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_read)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_read), BP_SYM (__read)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__read)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_read), BP_SYM (read)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (read)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=readlink NUMBER=((0x900000 + 85)) ARGS=i:spi SOURCE=-
+ifeq (,$(filter readlink,$(unix-syscalls)))
+unix-syscalls += readlink
+$(foreach o,$(object-suffixes),$(objpfx)readlink$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-readlink$o) $(objpfx)rtld-readlink.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__readlink, readlink, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__readlink)'; \
+	 echo 'libc_hidden_def (__readlink)'; \
+	 echo 'weak_alias (__readlink, readlink)'; \
+	 echo 'libc_hidden_weak (readlink)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter readlink,$(bp-thunks)))
+bp-thunks += readlink
+$(objpfx)$(bppfx)readlink.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __readlink(s1, p2, i3) i0v; \'; \
+	 echo 'extern char s1v; extern p2, p2v; extern i3, i3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__readlink) (__typeof (s1v) *__bounded s1a, __typeof (p2v) *__bounded p2a, __typeof (i3v) i3a) { \'; \
+	 echo '  extern __typeof (i0v) (__readlink) (__typeof (s1v) *__unbounded, __typeof (p2v) *__unbounded, __typeof (i3v)); \'; \
+	 echo '  return (__readlink) (CHECK_STRING (s1a), CHECK_1 (p2a), i3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__readlink)) \'; \
+	 echo 'weak_alias (BP_SYM (__readlink), BP_SYM (readlink)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (readlink)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=readv NUMBER=((0x900000 +145)) ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/readv.c
+
+#### CALL=reboot NUMBER=((0x900000 + 88)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/reboot.c
+
+#### CALL=rename NUMBER=((0x900000 + 38)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter rename,$(unix-syscalls)))
+unix-syscalls += rename
+$(foreach o,$(object-suffixes),$(objpfx)rename$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-rename$o) $(objpfx)rtld-rename.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (rename, rename, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(rename)'; \
+	 echo 'libc_hidden_def (rename)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter rename,$(bp-thunks)))
+bp-thunks += rename
+$(objpfx)$(bppfx)rename.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define rename(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (rename) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (rename) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (rename) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (rename)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=rmdir NUMBER=((0x900000 + 40)) ARGS=i:s SOURCE=-
+ifeq (,$(filter rmdir,$(unix-syscalls)))
+unix-syscalls += rmdir
+$(foreach o,$(object-suffixes),$(objpfx)rmdir$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-rmdir$o) $(objpfx)rtld-rmdir.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__rmdir, rmdir, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__rmdir)'; \
+	 echo 'libc_hidden_def (__rmdir)'; \
+	 echo 'weak_alias (__rmdir, rmdir)'; \
+	 echo 'libc_hidden_weak (rmdir)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter rmdir,$(bp-thunks)))
+bp-thunks += rmdir
+$(objpfx)$(bppfx)rmdir.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __rmdir(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__rmdir) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (__rmdir) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (__rmdir) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__rmdir)) \'; \
+	 echo 'weak_alias (BP_SYM (__rmdir), BP_SYM (rmdir)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (rmdir)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=select NUMBER=((0x900000 + 82)) ARGS=i:iPPPP SOURCE=-
+ifeq (,$(filter select,$(unix-syscalls)))
+unix-syscalls += select
+$(foreach o,$(object-suffixes),$(objpfx)select$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-select$o) $(objpfx)rtld-select.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__select, select, 5)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__select)'; \
+	 echo 'libc_hidden_def (__select)'; \
+	 echo 'weak_alias (__select, __libc_select)'; \
+	 echo 'libc_hidden_weak (__libc_select)'; \
+	 echo 'weak_alias (__select, select)'; \
+	 echo 'libc_hidden_weak (select)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter select,$(bp-thunks)))
+bp-thunks += select
+$(objpfx)$(bppfx)select.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __select(i1, P2, P3, P4, P5) i0v; \'; \
+	 echo 'extern i1, i1v; extern P2, P2v; extern P3, P3v; extern P4, P4v; extern P5, P5v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__select) (__typeof (i1v) i1a, __typeof (P2v) *__bounded P2a, __typeof (P3v) *__bounded P3a, __typeof (P4v) *__bounded P4a, __typeof (P5v) *__bounded P5a) { \'; \
+	 echo '  extern __typeof (i0v) (__select) (__typeof (i1v), __typeof (P2v) *__unbounded, __typeof (P3v) *__unbounded, __typeof (P4v) *__unbounded, __typeof (P5v) *__unbounded); \'; \
+	 echo '  return (__select) (i1a, CHECK_1_NULL_OK (P2a), CHECK_1_NULL_OK (P3a), CHECK_1_NULL_OK (P4a), CHECK_1_NULL_OK (P5a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__select)) \'; \
+	 echo 'weak_alias (BP_SYM (__select), BP_SYM (__libc_select)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__libc_select)) \'; \
+	 echo 'weak_alias (BP_SYM (__select), BP_SYM (select)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (select)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setdomain NUMBER=((0x900000 +121)) ARGS=i:si SOURCE=-
+ifeq (,$(filter setdomain,$(unix-syscalls)))
+unix-syscalls += setdomain
+$(foreach o,$(object-suffixes),$(objpfx)setdomain$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setdomain$o) $(objpfx)rtld-setdomain.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (setdomainname, setdomainname, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(setdomainname)'; \
+	 echo 'libc_hidden_def (setdomainname)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter setdomain,$(bp-thunks)))
+bp-thunks += setdomain
+$(objpfx)$(bppfx)setdomain.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define setdomainname(s1, i2) i0v; \'; \
+	 echo 'extern char s1v; extern i2, i2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (setdomainname) (__typeof (s1v) *__bounded s1a, __typeof (i2v) i2a) { \'; \
+	 echo '  extern __typeof (i0v) (setdomainname) (__typeof (s1v) *__unbounded, __typeof (i2v)); \'; \
+	 echo '  return (setdomainname) (CHECK_STRING (s1a), i2a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (setdomainname)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setegid NUMBER=- ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/setegid.c
+
+#### CALL=seteuid NUMBER=- ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/seteuid.c
+
+#### CALL=setgid NUMBER=((0x900000 + 46)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/setgid.c
+
+#### CALL=setgroups NUMBER=((0x900000 + 81)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/setgroups.c
+
+#### CALL=setitimer NUMBER=((0x900000 +104)) ARGS=i:ipp SOURCE=-
+ifeq (,$(filter setitimer,$(unix-syscalls)))
+unix-syscalls += setitimer
+$(foreach o,$(object-suffixes),$(objpfx)setitimer$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setitimer$o) $(objpfx)rtld-setitimer.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__setitimer, setitimer, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__setitimer)'; \
+	 echo 'libc_hidden_def (__setitimer)'; \
+	 echo 'weak_alias (__setitimer, setitimer)'; \
+	 echo 'libc_hidden_weak (setitimer)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter setitimer,$(bp-thunks)))
+bp-thunks += setitimer
+$(objpfx)$(bppfx)setitimer.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __setitimer(i1, p2, p3) i0v; \'; \
+	 echo 'extern i1, i1v; extern p2, p2v; extern p3, p3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__setitimer) (__typeof (i1v) i1a, __typeof (p2v) *__bounded p2a, __typeof (p3v) *__bounded p3a) { \'; \
+	 echo '  extern __typeof (i0v) (__setitimer) (__typeof (i1v), __typeof (p2v) *__unbounded, __typeof (p3v) *__unbounded); \'; \
+	 echo '  return (__setitimer) (i1a, CHECK_1 (p2a), CHECK_1 (p3a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__setitimer)) \'; \
+	 echo 'weak_alias (BP_SYM (__setitimer), BP_SYM (setitimer)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (setitimer)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=setpriority NUMBER=((0x900000 + 97)) ARGS=i:iii SOURCE=-
+ifeq (,$(filter setpriority,$(unix-syscalls)))
+unix-syscalls += setpriority
+$(foreach o,$(object-suffixes),$(objpfx)setpriority$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setpriority$o) $(objpfx)rtld-setpriority.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (setpriority, setpriority, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(setpriority)'; \
+	 echo 'libc_hidden_def (setpriority)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=setrlimit NUMBER=((0x900000 + 75)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/setrlimit.c
+
+#### CALL=setsid NUMBER=((0x900000 + 66)) ARGS=i: SOURCE=-
+ifeq (,$(filter setsid,$(unix-syscalls)))
+unix-syscalls += setsid
+$(foreach o,$(object-suffixes),$(objpfx)setsid$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-setsid$o) $(objpfx)rtld-setsid.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__setsid, setsid, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__setsid)'; \
+	 echo 'libc_hidden_def (__setsid)'; \
+	 echo 'weak_alias (__setsid, setsid)'; \
+	 echo 'libc_hidden_weak (setsid)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=settimeofday NUMBER=((0x900000 + 79)) ARGS=i:PP SOURCE=sysdeps/unix/sysv/settimeofday.c
+
+#### CALL=setuid NUMBER=((0x900000 + 23)) ARGS=i:i SOURCE=sysdeps/unix/sysv/linux/arm/setuid.c
+
+#### CALL=sigsuspend NUMBER=((0x900000 + 72)) ARGS=i:p SOURCE=sysdeps/unix/sysv/linux/sigsuspend.c
+
+#### CALL=sstk NUMBER=- ARGS=b:i SOURCE=-
+
+#### CALL=statfs NUMBER=((0x900000 + 99)) ARGS=i:sp SOURCE=-
+ifeq (,$(filter statfs,$(unix-syscalls)))
+unix-syscalls += statfs
+$(foreach o,$(object-suffixes),$(objpfx)statfs$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-statfs$o) $(objpfx)rtld-statfs.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__statfs, statfs, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__statfs)'; \
+	 echo 'libc_hidden_def (__statfs)'; \
+	 echo 'weak_alias (__statfs, statfs)'; \
+	 echo 'libc_hidden_weak (statfs)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter statfs,$(bp-thunks)))
+bp-thunks += statfs
+$(objpfx)$(bppfx)statfs.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __statfs(s1, p2) i0v; \'; \
+	 echo 'extern char s1v; extern p2, p2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__statfs) (__typeof (s1v) *__bounded s1a, __typeof (p2v) *__bounded p2a) { \'; \
+	 echo '  extern __typeof (i0v) (__statfs) (__typeof (s1v) *__unbounded, __typeof (p2v) *__unbounded); \'; \
+	 echo '  return (__statfs) (CHECK_STRING (s1a), CHECK_1 (p2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__statfs)) \'; \
+	 echo 'weak_alias (BP_SYM (__statfs), BP_SYM (statfs)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (statfs)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=swapoff NUMBER=((0x900000 +115)) ARGS=i:s SOURCE=-
+ifeq (,$(filter swapoff,$(unix-syscalls)))
+unix-syscalls += swapoff
+$(foreach o,$(object-suffixes),$(objpfx)swapoff$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-swapoff$o) $(objpfx)rtld-swapoff.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (swapoff, swapoff, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(swapoff)'; \
+	 echo 'libc_hidden_def (swapoff)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter swapoff,$(bp-thunks)))
+bp-thunks += swapoff
+$(objpfx)$(bppfx)swapoff.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define swapoff(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (swapoff) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (swapoff) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (swapoff) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (swapoff)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=swapon NUMBER=((0x900000 + 87)) ARGS=i:s SOURCE=-
+ifeq (,$(filter swapon,$(unix-syscalls)))
+unix-syscalls += swapon
+$(foreach o,$(object-suffixes),$(objpfx)swapon$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-swapon$o) $(objpfx)rtld-swapon.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (swapon, swapon, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(swapon)'; \
+	 echo 'libc_hidden_def (swapon)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter swapon,$(bp-thunks)))
+bp-thunks += swapon
+$(objpfx)$(bppfx)swapon.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define swapon(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (swapon) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (swapon) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (swapon) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (swapon)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=symlink NUMBER=((0x900000 + 83)) ARGS=i:ss SOURCE=-
+ifeq (,$(filter symlink,$(unix-syscalls)))
+unix-syscalls += symlink
+$(foreach o,$(object-suffixes),$(objpfx)symlink$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-symlink$o) $(objpfx)rtld-symlink.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__symlink, symlink, 2)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__symlink)'; \
+	 echo 'libc_hidden_def (__symlink)'; \
+	 echo 'weak_alias (__symlink, symlink)'; \
+	 echo 'libc_hidden_weak (symlink)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter symlink,$(bp-thunks)))
+bp-thunks += symlink
+$(objpfx)$(bppfx)symlink.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __symlink(s1, s2) i0v; \'; \
+	 echo 'extern char s1v; extern char s2v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__symlink) (__typeof (s1v) *__bounded s1a, __typeof (s2v) *__bounded s2a) { \'; \
+	 echo '  extern __typeof (i0v) (__symlink) (__typeof (s1v) *__unbounded, __typeof (s2v) *__unbounded); \'; \
+	 echo '  return (__symlink) (CHECK_STRING (s1a), CHECK_STRING (s2a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__symlink)) \'; \
+	 echo 'weak_alias (BP_SYM (__symlink), BP_SYM (symlink)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (symlink)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=sync NUMBER=((0x900000 + 36)) ARGS=i: SOURCE=-
+ifeq (,$(filter sync,$(unix-syscalls)))
+unix-syscalls += sync
+$(foreach o,$(object-suffixes),$(objpfx)sync$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-sync$o) $(objpfx)rtld-sync.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (sync, sync, 0)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(sync)'; \
+	 echo 'libc_hidden_def (sync)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=sys_fstat NUMBER=((0x900000 +108)) ARGS=i:ip SOURCE=sysdeps/unix/sysv/linux/arm/fxstat.c
+
+#### CALL=sys_mknod NUMBER=((0x900000 + 14)) ARGS=i:sii SOURCE=sysdeps/unix/sysv/linux/xmknod.c
+
+#### CALL=sys_stat NUMBER=((0x900000 +106)) ARGS=i:sp SOURCE=sysdeps/unix/sysv/linux/arm/xstat.c
+
+#### CALL=umask NUMBER=((0x900000 + 60)) ARGS=i:i SOURCE=-
+ifeq (,$(filter umask,$(unix-syscalls)))
+unix-syscalls += umask
+$(foreach o,$(object-suffixes),$(objpfx)umask$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-umask$o) $(objpfx)rtld-umask.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO_NOERRNO (__umask, umask, 1)'; \
+	 echo '	ret_NOERRNO'; \
+	 echo 'PSEUDO_END_NOERRNO(__umask)'; \
+	 echo 'libc_hidden_def (__umask)'; \
+	 echo 'weak_alias (__umask, umask)'; \
+	 echo 'libc_hidden_weak (umask)'; \
+	) | $(compile-syscall)
+endif
+
+#### CALL=uname NUMBER=((0x900000 +122)) ARGS=i:p SOURCE=-
+ifeq (,$(filter uname,$(unix-syscalls)))
+unix-syscalls += uname
+$(foreach o,$(object-suffixes),$(objpfx)uname$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-uname$o) $(objpfx)rtld-uname.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__uname, uname, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__uname)'; \
+	 echo 'libc_hidden_def (__uname)'; \
+	 echo 'weak_alias (__uname, uname)'; \
+	 echo 'libc_hidden_weak (uname)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter uname,$(bp-thunks)))
+bp-thunks += uname
+$(objpfx)$(bppfx)uname.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __uname(p1) i0v; \'; \
+	 echo 'extern p1, p1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__uname) (__typeof (p1v) *__bounded p1a) { \'; \
+	 echo '  extern __typeof (i0v) (__uname) (__typeof (p1v) *__unbounded); \'; \
+	 echo '  return (__uname) (CHECK_1 (p1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__uname)) \'; \
+	 echo 'weak_alias (BP_SYM (__uname), BP_SYM (uname)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (uname)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=unlink NUMBER=((0x900000 + 10)) ARGS=i:s SOURCE=-
+ifeq (,$(filter unlink,$(unix-syscalls)))
+unix-syscalls += unlink
+$(foreach o,$(object-suffixes),$(objpfx)unlink$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-unlink$o) $(objpfx)rtld-unlink.os: \
+		$(common-objpfx)s-proto.d
+	$(make-target-directory)
+	(echo '#include <sysdep.h>'; \
+	 echo 'PSEUDO (__unlink, unlink, 1)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__unlink)'; \
+	 echo 'libc_hidden_def (__unlink)'; \
+	 echo 'weak_alias (__unlink, unlink)'; \
+	 echo 'libc_hidden_weak (unlink)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter unlink,$(bp-thunks)))
+bp-thunks += unlink
+$(objpfx)$(bppfx)unlink.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __unlink(s1) i0v; \'; \
+	 echo 'extern char s1v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__unlink) (__typeof (s1v) *__bounded s1a) { \'; \
+	 echo '  extern __typeof (i0v) (__unlink) (__typeof (s1v) *__unbounded); \'; \
+	 echo '  return (__unlink) (CHECK_STRING (s1a)); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__unlink)) \'; \
+	 echo 'weak_alias (BP_SYM (__unlink), BP_SYM (unlink)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (unlink)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=utimes NUMBER=((0x900000 +269)) ARGS=i:sp SOURCE=sysdeps/unix/sysv/linux/utimes.c
+
+#### CALL=write NUMBER=((0x900000 + 4)) ARGS=i:ibn SOURCE=-
+ifeq (,$(filter write,$(unix-syscalls)))
+unix-syscalls += write
+$(foreach o,$(object-suffixes),$(objpfx)write$o) $(foreach o,$(object-suffixes),$(objpfx)ptw-write$o) $(objpfx)rtld-write.os: \
+		$(common-objpfx)s-proto-cancel.d
+	$(make-target-directory)
+	(echo '#include <sysdep-cancel.h>'; \
+	 echo 'PSEUDO (__libc_write, write, 3)'; \
+	 echo '	ret'; \
+	 echo 'PSEUDO_END(__libc_write)'; \
+	 echo 'libc_hidden_def (__libc_write)'; \
+	 echo 'weak_alias (__libc_write, __write)'; \
+	 echo 'libc_hidden_weak (__write)'; \
+	 echo 'weak_alias (__libc_write, write)'; \
+	 echo 'libc_hidden_weak (write)'; \
+	) | $(compile-syscall)
+endif
+ifeq (,$(filter write,$(bp-thunks)))
+bp-thunks += write
+$(objpfx)$(bppfx)write.ob: $(common-objpfx)s-proto-bp.d
+	(echo '#define __write(i1, b2, n3) i0v; \'; \
+	 echo 'extern i1, i1v; extern char b2v; extern n3, n3v; \'; \
+	 echo '__typeof (i0v) BP_SYM (__libc_write) (__typeof (i1v) i1a, __typeof (b2v) *__bounded b2a, __typeof (n3v) n3a) { \'; \
+	 echo '  extern __typeof (i0v) (__write) (__typeof (i1v), __typeof (b2v) *__unbounded, __typeof (n3v)); \'; \
+	 echo '  return (__write) (i1a, CHECK_N (b2a, n3a), n3a); \'; \
+	 echo '} \'; \
+	 echo 'libc_hidden_def (BP_SYM (__libc_write)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_write), BP_SYM (__write)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (__write)) \'; \
+	 echo 'weak_alias (BP_SYM (__libc_write), BP_SYM (write)) \'; \
+	 echo 'libc_hidden_weak (BP_SYM (write)) \'; \
+	 echo ''; \
+	 echo '#include <bp-thunks.h>'; \
+	) | $(COMPILE.c) -x c -o $@ -
+endif
+
+#### CALL=writev NUMBER=((0x900000 +146)) ARGS=i:ipi SOURCE=sysdeps/unix/sysv/linux/writev.c

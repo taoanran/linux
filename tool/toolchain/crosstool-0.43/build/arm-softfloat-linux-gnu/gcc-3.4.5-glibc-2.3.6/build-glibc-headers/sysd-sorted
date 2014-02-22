@@ -1,0 +1,2 @@
+sorted-subdirs = csu iconv iconvdata locale localedata assert ctype intl catgets math setjmp signal stdlib stdio-common libio dlfcn malloc string wcsmbs timezone time dirent grp pwd posix io termios resource misc socket sysvipc gmon gnulib wctype manual shadow po argp crypt resolv nss rt conform debug inet hesiod sunrpc nis nscd streams login elf 
+sysd-sorted-done = t

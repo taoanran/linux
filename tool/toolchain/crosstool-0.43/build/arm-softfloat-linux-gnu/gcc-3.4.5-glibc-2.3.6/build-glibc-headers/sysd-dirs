@@ -1,0 +1,3 @@
+sysdep-subdirs = inet resolv hesiod sunrpc nis nscd streams login
+sysdep-inhibit-subdirs =
+sysd-dirs-done = t

@@ -1,0 +1,33 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:583: checking host system type
+configure:604: checking target system type
+configure:622: checking build system type
+configure:677: checking for a BSD compatible install
+configure:2855: checking for i686-host_pc-linux-gnu-ar
+configure:2888: checking for ar
+configure:2927: checking for i686-host_pc-linux-gnu-as
+configure:2960: checking for as
+configure:2999: checking for i686-host_pc-linux-gnu-dlltool
+configure:3032: checking for dlltool
+configure:3071: checking for i686-host_pc-linux-gnu-ld
+configure:3104: checking for ld
+configure:3143: checking for i686-host_pc-linux-gnu-nm
+configure:3176: checking for nm
+configure:3215: checking for i686-host_pc-linux-gnu-ranlib
+configure:3248: checking for ranlib
+configure:3287: checking for i686-host_pc-linux-gnu-windres
+configure:3320: checking for windres
+configure:3359: checking for i686-host_pc-linux-gnu-objcopy
+configure:3392: checking for objcopy
+configure:3431: checking for i686-host_pc-linux-gnu-objdump
+configure:3464: checking for objdump
+configure:3513: checking for arm-softfloat-linux-gnu-ar
+configure:3585: checking for arm-softfloat-linux-gnu-as
+configure:3657: checking for arm-softfloat-linux-gnu-dlltool
+configure:3729: checking for arm-softfloat-linux-gnu-ld
+configure:3801: checking for arm-softfloat-linux-gnu-nm
+configure:3873: checking for arm-softfloat-linux-gnu-ranlib
+configure:3945: checking for arm-softfloat-linux-gnu-windres
+configure:4045: checking whether to enable maintainer-specific portions of Makefiles
