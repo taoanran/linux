@@ -929,6 +929,13 @@ config DM9000
 	  To compile this driver as a module, choose M here.  The module
 	  will be called dm9000.
 
+config CS8900a
+	tristate "CS8900a support"
+	depends on ARM && NET_ETHERNET
+	---help---
+	Support for CS8900a chipset.
+	To compile this driver as a module, choose M here.
+
 config DM9000_DEBUGLEVEL
 	int "DM9000 maximum debug level"
 	depends on DM9000
